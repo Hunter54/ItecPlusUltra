@@ -34,6 +34,7 @@ accompanist = "0.28.0"
 media3 = "1.0.0-rc02"
 ktlint = "11.2.0"
 detekt = "1.22.0"
+room = "2.5.1"
 
 #Tests
 junit = "4.13.2"
@@ -90,6 +91,10 @@ firebase-core = { module = "com.google.firebase:firebase-core", version.ref = "f
 firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx", version.ref = "firebase-analytics" }
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx", version.ref = "firebase-crashlytics" }
 firebase-config = { module = "com.google.firebase:firebase-config-ktx", version.ref = "firebase-config" }
+#ROOM
+room-runtime = { module = "androidx.room:room-runtime", version.ref = "room"}
+room-annotationProcessor = { module = "androidx.room:room-compiler", version.ref = "room"}
+room-coroutines = { module = "androidx.room:room-ktx", version.ref = "room"}
 
 #DecodeJWT
 decodeJwt = { module = "com.auth0.android:jwtdecode", version.ref = "decodeJwt" }
