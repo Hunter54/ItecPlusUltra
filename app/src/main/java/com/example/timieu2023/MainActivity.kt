@@ -39,7 +39,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun SplashScreen(onDataLoaded: () -> Unit) {
     var fakeLoading by remember { mutableStateOf(true) }
-    
+    var showMainScreen by remember { mutableStateOf(false) }
     LaunchedEffect(key1 = Unit) {
         delay(2000)
         fakeLoading = false
@@ -47,11 +47,15 @@ fun SplashScreen(onDataLoaded: () -> Unit) {
     }
 
     if(!fakeLoading) {
-        OnboardingScreen(
-            onButtonClicked = {
-//                MainScreen()
-            }
-        )
+        if(showMainScreen) {
+            MainScreen()
+        } else {
+            OnboardingScreen(
+                onButtonClicked = {
+                    showMainScreen = true
+                }
+            )
+        }
     }
 }
          
