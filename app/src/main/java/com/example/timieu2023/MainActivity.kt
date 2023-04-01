@@ -5,13 +5,11 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.example.timieu2023.features.onboarding.presentation.OnboardingScreen
 import com.example.timieu2023.ui.theme.TimiEu2023Theme
 import kotlinx.coroutines.delay
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,7 +22,7 @@ class MainActivity : ComponentActivity() {
         installSplashScreen().setKeepOnScreenCondition{ keepSplashOpened }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S){
             val splashScreen = installSplashScreen()
-            splashScreen.setKeepOnScreenCondition { false }
+
         }
         setContent {
             TimiEu2023Theme {
@@ -41,7 +39,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun SplashScreen(onDataLoaded: () -> Unit) {
     var fakeLoading by remember { mutableStateOf(true) }
-    
+    var showMainScreen by remember { mutableStateOf(false) }
     LaunchedEffect(key1 = Unit) {
         delay(2000)
         fakeLoading = false
@@ -49,13 +47,21 @@ fun SplashScreen(onDataLoaded: () -> Unit) {
     }
 
     if(!fakeLoading) {
-        MainScreen("Android")
+        if(showMainScreen) {
+            MainScreen()
+        } else {
+            OnboardingScreen(
+                onButtonClicked = {
+                    showMainScreen = true
+                }
+            )
+        }
     }
 }
          
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun MainScreen(name: String, appState: AppState = rememberAppState()) {
+fun MainScreen(appState: AppState = rememberAppState()) {
     val navController = appState.navController
     Scaffold(bottomBar = {
         BrivoAccessBottomNavigation(navController,

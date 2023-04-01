@@ -68,6 +68,9 @@ kapt {
 dependencies {
 
     implementation(libs.bundles.compose)
+    implementation(libs.room.runtime)
+    implementation(libs.room.coroutines)
+    annotationProcessor(libs.room.annotationProcessor)
 //    implementation(libs.bundles.firebase)
     implementation(libs.bundles.compose)
     implementation(libs.bundles.firebase)
@@ -80,6 +83,8 @@ dependencies {
     implementation(libs.media3Session)
     implementation(libs.bundles.retrofitAndSerialization)
     implementation(libs.squareup.okHttp)
+    implementation(libs.playServicesMaps)
+    implementation(libs.maps)
     kapt(libs.google.hiltandroidcompiler)
     testImplementation(libs.junit)
     testImplementation(libs.androidx.test.junit)
