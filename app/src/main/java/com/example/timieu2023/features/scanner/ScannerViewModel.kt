@@ -20,9 +20,9 @@ class ScannerViewModel @Inject constructor(private val locationsRepository: Loca
     ViewModel() {
 
     init {
-        viewModelScope.launch {
-            locationsRepository.fetchLocations()
-        }
+//        viewModelScope.launch {
+//            locationsRepository.fetchLocations()
+//        }
     }
 
     private val _scannerScreenState = MutableStateFlow<ScannerScreenState>(ScannerScreenState.Default)

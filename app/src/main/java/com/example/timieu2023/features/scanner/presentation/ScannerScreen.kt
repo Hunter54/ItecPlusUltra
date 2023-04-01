@@ -1,26 +1,16 @@
 package com.example.timieu2023.features.scanner.presentation
 
-import android.widget.Button
-import android.widget.Toast
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.icons.Icons
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.scale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -29,9 +19,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.example.timieu2023.R
 import com.example.timieu2023.features.scanner.ScannerViewModel
-import com.example.timieu2023.features.scanner.data.LocationEntity
-import com.google.mlkit.vision.codescanner.GmsBarcodeScannerOptions
 import com.google.mlkit.vision.codescanner.GmsBarcodeScanning
+import kotlinx.coroutines.launch
 
 @Composable
 fun ScannerRoute(
@@ -43,7 +32,6 @@ fun ScannerRoute(
         GmsBarcodeScanning.getClient(context, viewModel.options)
     }
     val visitedLocations by viewModel.visitedLocations.collectAsState()
-    Toast.makeText(context, visitedLocations.toString(), Toast.LENGTH_SHORT).show();
     ScannerScreen(visitedLocations = visitedLocations, onScanPressed = {
         scanner.startScan()
             .addOnSuccessListener { barcode ->
@@ -58,12 +46,18 @@ fun ScannerRoute(
     })
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ScannerScreen(
     visitedLocations: List<VisitedLocationItem>,
     onScanPressed: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+
+    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
+    var openBottomSheet by rememberSaveable { mutableStateOf(false) }
+    val coroutineScope = rememberCoroutineScope()
+    var selectedLocation by remember { mutableStateOf(visitedLocations.firstOrNull()) }
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -77,7 +71,13 @@ fun ScannerScreen(
                 .weight(1f)
         ) {
             items(visitedLocations) { location ->
-                VisitedLocationItem(item = location, onClick = {})
+                VisitedLocationItem(item = location, onClick = {
+                    selectedLocation = location
+                    coroutineScope.launch {
+                        openBottomSheet = true
+                        sheetState.expand()
+                    }
+                })
             }
         }
         Button(modifier = Modifier.padding(bottom = 40.dp), onClick = onScanPressed) {
@@ -95,8 +95,24 @@ fun ScannerScreen(
 
         }
     }
+    if (openBottomSheet) {
+        selectedLocation?.let {
+            LocationBottomSheet(sheetState = sheetState, locationItem = it) {
+                coroutineScope.launch {
+                    sheetState.hide()
+                }.invokeOnCompletion {
+                    if (!sheetState.isVisible) {
+                        openBottomSheet = false
+                    }
+                }
+            }
+        }
+
+    }
+
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun VisitedLocationItem(
     item: VisitedLocationItem,
@@ -107,9 +123,7 @@ fun VisitedLocationItem(
         .fillMaxWidth()
         .padding(horizontal = 8.dp, vertical = 8.dp)
         .height(IntrinsicSize.Min)
-        .clickable {
-            onClick(item)
-        }) {
+        , onClick = {onClick(item)}) {
         Row(
             modifier = Modifier.fillMaxSize(),
             verticalAlignment = Alignment.CenterVertically
@@ -118,7 +132,7 @@ fun VisitedLocationItem(
             AsyncImage(
                 modifier = Modifier
                     .padding(horizontal = 8.dp)
-                    .size(60.dp),
+                    .size(80.dp),
                 model = item.photoUrl,
                 contentDescription = null
             )
