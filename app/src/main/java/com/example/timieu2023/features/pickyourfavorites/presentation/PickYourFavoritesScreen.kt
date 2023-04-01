@@ -14,7 +14,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.timieu2023.R
@@ -29,8 +28,10 @@ var favoritesMap: MutableMap<String, Boolean> = mutableMapOf(
     "Science Fiction" to false
 )
 
+var filteredFavorites = mutableListOf<String>()
+
 @Composable
-fun PickYourFavoritesScreen() {
+fun PickYourFavoritesScreen(onContinueButtonClicked: () -> Unit) {
     TimiEu2023Theme {
         Surface(
             modifier = Modifier.fillMaxSize(),
@@ -62,7 +63,9 @@ fun PickYourFavoritesScreen() {
                             .width(250.dp)
                             .height(50.dp),
                         onClick = {
-                            println("cata $favoritesMap")
+                            filterFavoritesSections()
+                            onContinueButtonClicked()
+                            filteredFavorites.clear()
                         },
                     ) {
                         Text(text = stringResource(id = R.string.continue_pick_your_favorites))
@@ -249,14 +252,10 @@ fun ThirdRow() {
     favoritesMap[history] = historyChip
 }
 
-@Preview
-@Composable
-fun PickYourFavoritesScreenPreview() {
-    TimiEu2023Theme {
-        Surface(
-            modifier = Modifier.fillMaxSize()
-        ) {
-            PickYourFavoritesScreen()
+private fun filterFavoritesSections() {
+    for((key, value) in favoritesMap) {
+        if(value) {
+            filteredFavorites.add(key)
         }
     }
 }

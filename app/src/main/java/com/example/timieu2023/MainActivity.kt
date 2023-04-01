@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.example.timieu2023.features.onboarding.presentation.OnboardingScreen
 import com.example.timieu2023.features.pickyourfavorites.presentation.PickYourFavoritesScreen
+import com.example.timieu2023.features.pickyourfavorites.presentation.filteredFavorites
 import com.example.timieu2023.ui.theme.TimiEu2023Theme
 import kotlinx.coroutines.delay
 import dagger.hilt.android.AndroidEntryPoint
@@ -49,22 +50,33 @@ fun SplashScreen(onDataLoaded: () -> Unit) {
 
     if(!fakeLoading) {
         if(pickYourFavoritesScreen) {
-            //MainScreen()
-            PickYourFavoritesScreen()
+            PickYourFavoritesScreen(
+                onContinueButtonClicked = {
+                    showMainScreen = true
+                }
+            )
         } else {
             OnboardingScreen(
                 onButtonClicked = {
-                    //showMainScreen = true
                     pickYourFavoritesScreen = true
                 }
             )
         }
     }
+    if(showMainScreen) {
+        MainScreen(
+            favoritesSections = filteredFavorites
+        )
+    }
 }
          
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun MainScreen(appState: AppState = rememberAppState()) {
+fun MainScreen(
+    favoritesSections: List<String>,
+    appState: AppState = rememberAppState()
+) {
+    println("cata $favoritesSections")
     val navController = appState.navController
     Scaffold(bottomBar = {
         BrivoAccessBottomNavigation(navController,
