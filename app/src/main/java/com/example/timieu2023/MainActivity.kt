@@ -10,6 +10,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.example.timieu2023.features.onboarding.presentation.OnboardingScreen
+import com.example.timieu2023.features.pickyourfavorites.presentation.PickYourFavoritesScreen
 import com.example.timieu2023.ui.theme.TimiEu2023Theme
 import kotlinx.coroutines.delay
 import dagger.hilt.android.AndroidEntryPoint
@@ -47,11 +48,12 @@ fun SplashScreen(onDataLoaded: () -> Unit) {
     }
 
     if(!fakeLoading) {
-        OnboardingScreen(
-            onButtonClicked = {
-//                MainScreen()
-            }
-        )
+//        OnboardingScreen(
+//            onButtonClicked = {
+////                MainScreen()
+//            }
+//        )
+        PickYourFavoritesScreen()
     }
 }
          
