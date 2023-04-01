@@ -1,6 +1,5 @@
 package com.example.timieu2023
 
-import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
@@ -29,11 +28,11 @@ sealed class BottomNavigationItem(
             R.string.map
         )
 
-    object Favourite :
+    object Scanner :
         BottomNavigationItem(
-            "favourite",
+            "scanner",
             Icons.Default.Favorite,
-            R.string.favourite
+            R.string.scanner
         )
 
     object Account :

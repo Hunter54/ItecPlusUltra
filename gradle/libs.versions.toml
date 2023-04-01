@@ -37,6 +37,7 @@ detekt = "1.22.0"
 maps-compose = "2.11.2"
 play-services-maps = "18.1.0"
 room = "2.5.1"
+play-services-barcode-scanner = "16.0.0"
 
 #Tests
 junit = "4.13.2"
@@ -119,8 +120,9 @@ media3Ui = { module = "androidx.media3:media3-ui", version.ref = "media3"}
 media3Session = { module = "androidx.media3:media3-session", version.ref = "media3"}
 
 #Google Maps
-maps = { module = "com.google.maps.android:maps-compose", version.ref = "maps-compose" }
-playServicesMaps = {module = "com.google.android.gms:play-services-maps", version.ref = "play-services-maps"}
+maps-compose = { module = "com.google.maps.android:maps-compose", version.ref = "maps-compose" }
+maps-playServices = {module = "com.google.android.gms:play-services-maps", version.ref = "play-services-maps"}
+playServiceCodeScanner = {module = "com.google.android.gms:play-services-code-scanner", version.ref = "play-services-barcode-scanner"}
 
 
 [bundles]
