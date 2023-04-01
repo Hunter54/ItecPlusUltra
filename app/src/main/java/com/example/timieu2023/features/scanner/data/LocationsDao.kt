@@ -11,15 +11,25 @@ interface LocationsDao{
     @Query("SELECT * FROM locations")
     fun getAllLocations(): Flow<List<LocationEntity>>
 
+    @Query("SELECT * FROM locations WHERE location_visited")
+    fun getAllVisitedLocations(): Flow<List<LocationEntity>>
+
     @Update
-    suspend fun changeLocation(location:LocationEntity)
+    suspend fun updateLocation(location:LocationEntity)
+
+    @Query("UPDATE locations SET location_visited = :visited WHERE id = :id")
+    suspend fun updateLocationVisitedStatus(id: String, visited: Boolean = true)
 
     @Query("SELECT * FROM locations WHERE id = :locationId ")
     suspend fun getLocationById( locationId: String): LocationEntity
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertLocations(vararg users: LocationEntity)
+    suspend fun insertLocations(vararg location: LocationEntity)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertLocations( locations: List<LocationEntity>)
 
     @Delete
     suspend fun delete(eventEntity: LocationEntity)
+
 }

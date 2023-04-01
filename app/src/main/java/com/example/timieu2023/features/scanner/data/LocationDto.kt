@@ -19,7 +19,8 @@ data class LocationDto(
             this.locationDescription,
             this.locationLongitude,
             this.locationLatitude,
-            this.photoUrl
+            this.photoUrl,
+            false
         )
     }
 }

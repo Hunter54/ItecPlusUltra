@@ -11,5 +11,6 @@ data class LocationEntity(
     @ColumnInfo(name = "location_description") val locationDescription: String?,
     @ColumnInfo(name = "location_longitude") val locationLongitude: Double?,
     @ColumnInfo(name = "location_latitude") val locationLatitude: Double?,
-    @ColumnInfo(name = "location_photo_url") val photoUrl: String?
+    @ColumnInfo(name = "location_photo_url") val photoUrl: String?,
+    @ColumnInfo(name = "location_visited") val locationVisited: Boolean
 )

@@ -7,10 +7,18 @@ class LocationsRepository @Inject constructor(
     private val locationsDataSource: LocationsDataSource
 ) {
 
-    val userVisitedLocations = locationsDao.getAllLocations()
+    val allLocations = locationsDao.getAllLocations()
 
-    suspend fun fetchAndSaveVisitedLocation(locationId: String) {
-        val location = locationsDataSource.getLocation(locationId).mapToLocationEntity()
+    val visitedLocations = locationsDao.getAllVisitedLocations()
+
+    suspend fun addVisitedLocation(locationId: String){
+        locationsDao.updateLocationVisitedStatus(locationId)
+    }
+
+    suspend fun fetchLocations() {
+        val location = locationsDataSource.getLocations().map{
+            it.mapToLocationEntity()
+        }
         locationsDao.insertLocations(location)
     }
 
