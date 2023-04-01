@@ -13,10 +13,10 @@ interface EventDao {
     suspend fun getEventById( eventId: String): EventEntity
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(vararg users: EventEntity)
+    suspend fun insertAll(vararg events: EventEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(vararg users: List<EventEntity>)
+    suspend fun insertAll(events: List<EventEntity>)
 
     @Delete
     suspend fun delete(eventEntity: EventEntity)

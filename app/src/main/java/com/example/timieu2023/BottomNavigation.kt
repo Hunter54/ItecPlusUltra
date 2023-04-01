@@ -16,6 +16,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.navOptions
 import com.example.timieu2023.features.home.presentation.navigation.navigateToHomeTabGraph
 import com.example.timieu2023.features.maps.presentation.navigation.navigateToMapsGraph
+import com.example.timieu2023.features.scanner.presentation.navigateToScannerTab
 
 @Composable
 fun BrivoAccessBottomNavigation(
@@ -26,7 +27,7 @@ fun BrivoAccessBottomNavigation(
     val destinations = listOf(
         BottomNavigationItem.Home,
         BottomNavigationItem.Map,
-        BottomNavigationItem.Favourite,
+        BottomNavigationItem.Scanner,
         BottomNavigationItem.Account
     )
 
@@ -73,7 +74,7 @@ fun navigateToTopLevelDestination(
         BottomNavigationItem.Home -> navController.navigateToHomeTabGraph(topLevelNavOptions)
 //        BottomNavigationItem.Account -> navController.navigateAccount(topLevelNavOptions)
         BottomNavigationItem.Map -> navController.navigateToMapsGraph(topLevelNavOptions)
-//        BottomNavigationItem.Favourite -> navController.navigateUsers(topLevelNavOptions)
+        BottomNavigationItem.Scanner -> navController.navigateToScannerTab(topLevelNavOptions)
         else -> {
             navController.navigateToMapsGraph(topLevelNavOptions)
         }
