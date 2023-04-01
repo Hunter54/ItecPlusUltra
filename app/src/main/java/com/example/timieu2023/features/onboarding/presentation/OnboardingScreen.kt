@@ -18,7 +18,9 @@ import com.example.timieu2023.R
 import com.example.timieu2023.ui.theme.seed
 
 @Composable
-fun OnboardingScreen(onButtonClicked: () -> Unit) {
+fun OnboardingScreen(
+    onButtonClicked: () -> Unit,
+) {
     Box {
         Box(
             modifier = Modifier

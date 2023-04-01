@@ -69,6 +69,8 @@ fun PickYourFavoritesScreen(
                             .height(50.dp),
                         onClick = {
                             filterFavoritesSections()
+                            pickYourFavoritesViewModel.filteredFavorites = filteredFavorites
+                            pickYourFavoritesViewModel.addDataToDataStore()
                             onContinueButtonClicked()
                             filteredFavorites.clear()
                         },
