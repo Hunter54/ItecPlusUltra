@@ -10,6 +10,8 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.example.timieu2023.features.onboarding.presentation.OnboardingScreen
+import com.example.timieu2023.features.pickyourfavorites.presentation.PickYourFavoritesScreen
+import com.example.timieu2023.features.pickyourfavorites.presentation.filteredFavorites
 import com.example.timieu2023.ui.theme.TimiEu2023Theme
 import kotlinx.coroutines.delay
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,8 +23,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         installSplashScreen().setKeepOnScreenCondition{ keepSplashOpened }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S){
-            val splashScreen = installSplashScreen()
-
+            installSplashScreen()
         }
         setContent {
             TimiEu2023Theme {
@@ -40,6 +41,7 @@ class MainActivity : ComponentActivity() {
 fun SplashScreen(onDataLoaded: () -> Unit) {
     var fakeLoading by remember { mutableStateOf(true) }
     var showMainScreen by remember { mutableStateOf(false) }
+    var pickYourFavoritesScreen by remember { mutableStateOf(false) }
     LaunchedEffect(key1 = Unit) {
         delay(2000)
         fakeLoading = false
@@ -47,21 +49,31 @@ fun SplashScreen(onDataLoaded: () -> Unit) {
     }
 
     if(!fakeLoading) {
-        if(showMainScreen) {
-            MainScreen()
-        } else {
-            OnboardingScreen(
-                onButtonClicked = {
+        if(pickYourFavoritesScreen) {
+            PickYourFavoritesScreen(
+                onContinueButtonClicked = {
                     showMainScreen = true
                 }
             )
+        } else {
+            OnboardingScreen(
+                onButtonClicked = {
+                    pickYourFavoritesScreen = true
+                }
+            )
         }
+    }
+    if(showMainScreen) {
+        MainScreen()
     }
 }
          
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun MainScreen(appState: AppState = rememberAppState()) {
+fun MainScreen(
+    appState: AppState = rememberAppState(),
+) {
+
     val navController = appState.navController
     Scaffold(bottomBar = {
         BrivoAccessBottomNavigation(navController,

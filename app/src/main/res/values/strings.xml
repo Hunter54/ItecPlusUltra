@@ -5,6 +5,14 @@
     <string name="map">Map</string>
     <string name="acount">Account</string>
     <string name="lets_start">Let\'s Start</string>
+    <string name="pick_your_favorites">Pick Your Favorites</string>
+    <string name="continue_pick_your_favorites">Continue</string>
+    <string name="sport_chip">Sport</string>
+    <string name="art_chip">Art</string>
+    <string name="theatre_chip">Theatre</string>
+    <string name="innovation_chip">Innovation</string>
+    <string name="science_fiction_chip">Science Fiction</string>
+    <string name="history_chip">History</string>
     <string name="scan_qr_button">Scan QR code</string>
     <string name="failed_confirm_visit">There was a problem validating your scan</string>
 </resources>
