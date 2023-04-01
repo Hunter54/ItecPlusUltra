@@ -84,8 +84,6 @@ dependencies {
     implementation(libs.media3Ui)
     implementation(libs.media3Session)
     implementation(libs.kotlinx.serialization)
-    implementation(libs.maps)
-    implementation(libs.playServicesMaps)
     implementation(libs.datastore)
     implementation(libs.bundles.retrofitAndSerialization)
     implementation(libs.squareup.okHttp)
