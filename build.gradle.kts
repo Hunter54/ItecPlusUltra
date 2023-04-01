@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.kotlin.android).apply(false)
     alias(libs.plugins.google.hilt).apply(false)
     alias(libs.plugins.kotlin.kapt).apply(false)
+    alias(libs.plugins.kotlin.serialization).apply(false)
 //    alias(libs.plugins.google.gms).apply(false)
 //    alias(libs.plugins.firebase.crashlytics).apply(false)
 }

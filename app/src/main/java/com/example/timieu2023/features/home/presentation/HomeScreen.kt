@@ -21,12 +21,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.timieu2023.R
+import com.example.timieu2023.features.home.presentation.weather.WeatherCard
+import com.example.timieu2023.features.home.presentation.weather.WeatherForecast
+import com.example.timieu2023.features.home.presentation.weather.WeatherState
 
 @Composable
 fun HomeTabRoute(
@@ -40,7 +42,8 @@ fun HomeTabRoute(
             viewModel.onSearchQueryChange(query)
         },
         homeState.query,
-        modifier
+        weatherState = homeState.weatherState,
+        modifier,
     )
 }
 
@@ -48,6 +51,7 @@ fun HomeTabRoute(
 fun HomeTabScreen(
     onQueryChange: (String) -> Unit,
     query: String,
+    weatherState: WeatherState,
     modifier: Modifier = Modifier
 ) {
 
@@ -65,6 +69,10 @@ fun HomeTabScreen(
         HomeTopQuestion(
             modifier
         )
+        HomeFilterChips(
+            modifier
+        )
+        HomeWeatherTab(weatherState = weatherState)
     }
 }
 
@@ -148,3 +156,42 @@ fun HomeTopQuestion(
         }
     }
 }
+
+@Composable
+fun HomeFilterChips(
+    modifier: Modifier = Modifier
+) {
+    Text(
+        text = "Filter chips",
+        modifier = modifier.padding(16.dp)
+    )
+}
+
+@Composable
+fun HomeWeatherTab(
+    weatherState: WeatherState,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier
+    ) {
+        HomeWeatherTitle()
+        WeatherCard(state = weatherState, backgroundColor = Color.White)
+        WeatherForecast(state = weatherState)
+    }
+}
+
+@Composable
+fun HomeWeatherTitle(
+    modifier: Modifier = Modifier
+) {
+    Text(
+        text = "Weather",
+        fontSize = 22.sp,
+        fontWeight = FontWeight.Bold,
+        modifier = modifier.padding(start = 16.dp, top = 4.dp, bottom = 4.dp)
+    )
+}
+
+
+

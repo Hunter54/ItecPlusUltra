@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.google.hilt)
     alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.kotlin.serialization)
     //    alias(libs.plugins.google.gms)
 //    alias(libs.plugins.firebase.crashlytics)
 }
@@ -77,7 +78,8 @@ dependencies {
     implementation(libs.media3)
     implementation(libs.media3Ui)
     implementation(libs.media3Session)
-    implementation(libs.kotlinx.serialization)
+    implementation(libs.bundles.retrofitAndSerialization)
+    implementation(libs.squareup.okHttp)
     kapt(libs.google.hiltandroidcompiler)
     testImplementation(libs.junit)
     testImplementation(libs.androidx.test.junit)
