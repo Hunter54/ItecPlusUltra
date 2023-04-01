@@ -9,6 +9,7 @@ import androidx.navigation.navigation
 import com.example.timieu2023.features.home.presentation.navigation.homeTabScreen
 import com.example.timieu2023.features.home.presentation.navigation.MapsDestinations
 import com.example.timieu2023.features.maps.presentation.navigation.mapsTabScreen
+import com.example.timieu2023.features.scanner.presentation.scannerTabScreen
 
 @Composable
 fun MainNavigation(
@@ -19,6 +20,7 @@ fun MainNavigation(
     NavHost(navController = navController, startDestination = BottomNavigationItem.Home.route, modifier = modifier){
         homeGraph()
         mapsTabScreen()
+        scannerTabScreen()
     }
 
 }
