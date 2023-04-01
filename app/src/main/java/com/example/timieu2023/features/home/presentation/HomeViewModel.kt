@@ -2,20 +2,26 @@ package com.example.timieu2023.features.home.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.timieu2023.features.home.domain.DestinationViewData
+import com.example.timieu2023.features.home.data.EventRepository
+import com.example.timieu2023.features.home.domain.EventViewData
 import com.example.timieu2023.features.home.domain.Resource
 import com.example.timieu2023.features.home.domain.WeatherRepository
 import com.example.timieu2023.features.home.presentation.weather.WeatherState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val weatherRepository: WeatherRepository
+    private val weatherRepository: WeatherRepository,
+    private val eventRepository: EventRepository
 ) : ViewModel() {
 
     private val _state =
@@ -24,17 +30,25 @@ class HomeViewModel @Inject constructor(
 
     init {
         loadWeatherInfo()
-        _state.update {
-            it.copy(
-                destinations = listOf(
-                    DestinationViewData(),
-                    DestinationViewData(),
-                    DestinationViewData(),
-                    DestinationViewData(),
-                )
-            )
+        viewModelScope.launch {
+            eventRepository.refreshEvents()
         }
     }
+
+    val events = eventRepository.events.map { eventsList ->
+            eventsList.map {
+                EventViewData(
+                    eventName = it.eventName,
+                    eventCategory = it.eventCategory,
+                    eventDescription = it.eventDescription,
+                    imageRef = it.photoUrl
+                )
+            }
+        }.stateIn(
+            viewModelScope,
+            SharingStarted.WhileSubscribed(5000), listOf()
+        )
+
 
     fun onSearchQueryChange(changedQuery: String) {
         _state.update {
@@ -88,5 +102,4 @@ data class HomeViewState(
     val weatherState: WeatherState = WeatherState(
         weatherInfo = null, isLoading = false, error = null
     ),
-    val destinations: List<DestinationViewData> = emptyList()
 )
