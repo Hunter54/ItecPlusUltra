@@ -1,6 +1,8 @@
 package com.example.timieu2023.di
 
 import android.app.Application
+import androidx.lifecycle.ProcessLifecycleOwner
+import androidx.lifecycle.lifecycleScope
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -14,6 +16,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineScope
 import javax.inject.Singleton
 
 @Module
@@ -25,6 +28,10 @@ object AppModule {
 //    fun provideEventsRepository(
 //        dataSource: EventsDataSource
 //    ): EventsRepository = EventsRepositoryImpl(dataSource)
+
+    @Provides
+    @Singleton
+    fun provideCoroutineScope(): CoroutineScope = ProcessLifecycleOwner.get().lifecycleScope
 
     @Singleton
     @Provides
