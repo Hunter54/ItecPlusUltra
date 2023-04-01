@@ -1,6 +1,6 @@
 package com.example.timieu2023.features.home.data
 
-import androidx.room.ColumnInfo
+import com.example.timieu2023.features.home.data.enum.EventCategory
 
 
 data class EventDTO(

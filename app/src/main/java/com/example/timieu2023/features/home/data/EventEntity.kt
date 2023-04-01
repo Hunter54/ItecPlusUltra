@@ -3,6 +3,7 @@ package com.example.timieu2023.features.home.data
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.example.timieu2023.features.home.data.enum.EventCategory
 
 @Entity(tableName = "event")
 data class EventEntity(
