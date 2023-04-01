@@ -79,6 +79,7 @@ dependencies {
     implementation(libs.bundles.androidx)
     implementation(libs.kotlinx.coroutines.android)
     implementation("androidx.lifecycle:lifecycle-process:2.5.1")
+    implementation(libs.coil)
     implementation(libs.media3)
     implementation(libs.media3Ui)
     implementation(libs.media3Session)

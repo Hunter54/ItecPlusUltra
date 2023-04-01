@@ -6,10 +6,10 @@ import com.example.timieu2023.features.home.data.EventEntity
 
 data class LocationDto(
     val id: String,
-    val locationName: String?,
-    val locationDescription: String?,
-    val locationLongitude: Double?,
-    val locationLatitude: Double?,
+    val locationName: String,
+    val locationDescription: String,
+    val locationLongitude: Double,
+    val locationLatitude: Double,
     val photoUrl: String?
 ) {
     fun mapToLocationEntity(): LocationEntity {

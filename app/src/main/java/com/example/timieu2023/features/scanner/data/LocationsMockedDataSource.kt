@@ -9,7 +9,7 @@ class LocationsMockedDataSource : LocationsDataSource {
                 "Old Location for the old fortress",
                 45.757051,
                 21.234220,
-                "https://lh5.googleusercontent.com/p/AF1QipP_fFDvVvvNt0lCWrqbxrI8u1X2OYBDCIMhxNla=w408-h272-k-no"
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Bastionul_Theresia_ansamblu.jpg/440px-Bastionul_Theresia_ansamblu.jpg"
             )
         )
     }
