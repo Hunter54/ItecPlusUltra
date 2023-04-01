@@ -1,5 +1,6 @@
 package com.example.timieu2023
 
+import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
@@ -7,38 +8,32 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
 
 sealed class BottomNavigationItem(
     val route: String,
-    var icon: ImageVector,
+    @DrawableRes var icon: Int,
     @StringRes var title: Int
 ) {
 
     object Home :
         BottomNavigationItem(
             "home",
-            Icons.Default.Home,
+            R.drawable.baseline_home_24,
             R.string.home
         )
 
     object Map :
         BottomNavigationItem(
             "map",
-            Icons.Default.LocationOn,
+            R.drawable.baseline_map_24,
             R.string.map
         )
 
     object Scanner :
         BottomNavigationItem(
-            "scanner",
-            Icons.Default.Favorite,
+            "hunt",
+            R.drawable.baseline_explore_24,
             R.string.scanner
-        )
-
-    object Account :
-        BottomNavigationItem(
-            "account",
-            Icons.Default.AccountCircle,
-            R.string.acount
         )
 }

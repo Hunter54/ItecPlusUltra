@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">TimiEu2023</string>
     <string name="home">Home</string>
-    <string name="scanner">Scanner</string>
+    <string name="scanner">Hunt</string>
     <string name="map">Map</string>
     <string name="acount">Account</string>
     <string name="lets_start">Let\'s Start</string>

@@ -7,6 +7,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
@@ -27,8 +28,7 @@ fun BrivoAccessBottomNavigation(
     val destinations = listOf(
         BottomNavigationItem.Home,
         BottomNavigationItem.Map,
-        BottomNavigationItem.Scanner,
-        BottomNavigationItem.Account
+        BottomNavigationItem.Scanner
     )
 
     NavigationBar(modifier = Modifier) {
@@ -41,7 +41,7 @@ fun BrivoAccessBottomNavigation(
                 selected = selected, onClick = { onNavigateToDestination(destination) },
 
                 icon = {
-                    Icon(imageVector = destination.icon, contentDescription = null)
+                    Icon(painterResource(id = destination.icon), contentDescription = null)
                 },
                 label = {
                     Text(text = stringResource(id = destination.title))
