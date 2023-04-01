@@ -1,14 +1,17 @@
 package com.example.timieu2023.features.scanner
 
+import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.ApiState
+import com.example.timieu2023.features.scanner.data.LocationEntity
 import com.example.timieu2023.features.scanner.data.LocationsRepository
+import com.example.timieu2023.features.scanner.presentation.VisitedLocationItem
 import com.google.mlkit.vision.barcode.common.Barcode
 import com.google.mlkit.vision.codescanner.GmsBarcodeScannerOptions
 import com.google.mlkit.vision.codescanner.GmsBarcodeScanning
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -22,7 +25,14 @@ class ScannerViewModel @Inject constructor(private val locationsRepository: Loca
         }
     }
 
-    val visitedLocations = locationsRepository.visitedLocations.stateIn(
+    private val _scannerScreenState = MutableStateFlow<ScannerScreenState>(ScannerScreenState.Default)
+    val scannerScreenState = _scannerScreenState.asStateFlow()
+
+    val visitedLocations = locationsRepository.visitedLocations.map { locationList ->
+        locationList.map {
+            VisitedLocationItem(it.id, it.locationName, it.locationDescription, it.photoUrl)
+        }
+    }.stateIn(
         viewModelScope,
         SharingStarted.WhileSubscribed(5000), listOf()
     )
@@ -35,7 +45,20 @@ class ScannerViewModel @Inject constructor(private val locationsRepository: Loca
         .build()
 
     fun addVisitedLocation(locationId: String) {
-        viewModelScope.launch { locationsRepository.addVisitedLocation(locationId) }
+        viewModelScope.launch {
+            _scannerScreenState.update { ScannerScreenState.Loading }
+            when(val result  = locationsRepository.addVisitedLocation(locationId)){
+                is ApiState.Failed -> ScannerScreenState.Error(result.message)
+                is ApiState.Success -> ScannerScreenState.Success(result.data)
+            }
+        }
     }
 
+}
+
+sealed interface ScannerScreenState {
+    object Default: ScannerScreenState
+    object Loading: ScannerScreenState
+    data class Success(val location: LocationEntity): ScannerScreenState
+    data class Error(@StringRes val string: Int): ScannerScreenState
 }

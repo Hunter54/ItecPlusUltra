@@ -18,7 +18,7 @@ interface LocationsDao{
     suspend fun updateLocation(location:LocationEntity)
 
     @Query("UPDATE locations SET location_visited = :visited WHERE id = :id")
-    suspend fun updateLocationVisitedStatus(id: String, visited: Boolean = true)
+    suspend fun updateLocationVisitedStatus(id: String, visited: Boolean = true): Int
 
     @Query("SELECT * FROM locations WHERE id = :locationId ")
     suspend fun getLocationById( locationId: String): LocationEntity
