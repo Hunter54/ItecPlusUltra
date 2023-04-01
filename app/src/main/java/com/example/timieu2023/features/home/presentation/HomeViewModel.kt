@@ -2,6 +2,7 @@ package com.example.timieu2023.features.home.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.timieu2023.features.home.domain.DestinationViewData
 import com.example.timieu2023.features.home.domain.Resource
 import com.example.timieu2023.features.home.domain.WeatherRepository
 import com.example.timieu2023.features.home.presentation.weather.WeatherState
@@ -23,6 +24,16 @@ class HomeViewModel @Inject constructor(
 
     init {
         loadWeatherInfo()
+        _state.update {
+            it.copy(
+                destinations = listOf(
+                    DestinationViewData(),
+                    DestinationViewData(),
+                    DestinationViewData(),
+                    DestinationViewData(),
+                )
+            )
+        }
     }
 
     fun onSearchQueryChange(changedQuery: String) {
@@ -76,5 +87,6 @@ data class HomeViewState(
     val query: String,
     val weatherState: WeatherState = WeatherState(
         weatherInfo = null, isLoading = false, error = null
-    )
+    ),
+    val destinations: List<DestinationViewData> = emptyList()
 )
