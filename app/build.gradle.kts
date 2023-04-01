@@ -67,6 +67,9 @@ kapt {
 dependencies {
 
     implementation(libs.bundles.compose)
+    implementation(libs.room.runtime)
+    implementation(libs.room.coroutines)
+    annotationProcessor(libs.room.annotationProcessor)
 //    implementation(libs.bundles.firebase)
     implementation(libs.bundles.compose)
     implementation(libs.bundles.firebase)
