@@ -3,8 +3,11 @@ package com.example.timieu2023.features.maps.presentation
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.timieu2023.features.scanner.data.LocationEntity
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.GoogleMap
@@ -17,26 +20,43 @@ fun MapsTabRoute(
     modifier: Modifier = Modifier,
     viewModel: MapsViewModel = hiltViewModel()
 ){
-    MapsTabScreen()
+    val locations by viewModel.locations.collectAsState()
+
+
+
+    MapsTabScreen(
+        locations
+    )
 }
 
 @Composable
 fun MapsTabScreen(
+    locations: List<LocationEntity>,
     modifier: Modifier = Modifier
 ){
-    val singapore = LatLng(1.35, 103.87)
+    val timisoara = LatLng(45.75, 21.23)
+
     val cameraPositionState = rememberCameraPositionState {
-        position = CameraPosition.fromLatLngZoom(singapore, 10f)
+        position = CameraPosition.fromLatLngZoom(timisoara, 12.5f)
     }
     GoogleMap(
         modifier = Modifier.fillMaxSize(),
         cameraPositionState = cameraPositionState
     ) {
         Marker(
-            state = MarkerState(position = singapore),
-            title = "Singapore",
-            snippet = "Marker in Singapore"
+            state = MarkerState(position = timisoara),
+            title = "Timisoara",
+            snippet = "Downtown Timisoara"
         )
+        locations.forEach {
+            Marker(
+                state = MarkerState(position = LatLng(
+                    it.locationLatitude, it.locationLongitude
+                )),
+                title = it.locationName,
+                snippet = ""
+            )
+        }
     }
 }
 
