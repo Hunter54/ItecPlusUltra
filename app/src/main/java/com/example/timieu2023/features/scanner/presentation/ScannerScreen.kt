@@ -1,5 +1,8 @@
 package com.example.timieu2023.features.scanner.presentation
 
+import android.widget.Toast
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -8,16 +11,22 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role.Companion.Image
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
+import coil.compose.AsyncImagePainter
+import coil.compose.rememberAsyncImagePainter
 import com.example.timieu2023.R
+import com.example.timieu2023.features.scanner.ScannerScreenState
 import com.example.timieu2023.features.scanner.ScannerViewModel
 import com.google.mlkit.vision.codescanner.GmsBarcodeScanning
 import kotlinx.coroutines.launch
@@ -31,43 +40,79 @@ fun ScannerRoute(
     val scanner = remember {
         GmsBarcodeScanning.getClient(context, viewModel.options)
     }
+    val scannerScreenState by viewModel.scannerScreenState.collectAsState()
     val visitedLocations by viewModel.visitedLocations.collectAsState()
-    ScannerScreen(visitedLocations = visitedLocations, onScanPressed = {
-        scanner.startScan()
-            .addOnSuccessListener { barcode ->
-                barcode.displayValue?.let { viewModel.addVisitedLocation(it) }
-            }
-            .addOnCanceledListener {
-                // Task canceled
-            }
-            .addOnFailureListener { e ->
-                // Task failed with an exception
-            }
-    })
+    ScannerScreen(
+        scannerScreenState = scannerScreenState,
+        visitedLocations = visitedLocations,
+        resetScreenState = {
+            viewModel.resetScannerScreenState()
+        },
+        onScanPressed = {
+            scanner.startScan()
+                .addOnSuccessListener { barcode ->
+                    barcode.displayValue?.let { viewModel.addVisitedLocation(it) }
+                }
+                .addOnCanceledListener {
+                    // Task canceled
+                }
+                .addOnFailureListener { e ->
+                    // Task failed with an exception
+                }
+        })
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ScannerScreen(
     visitedLocations: List<VisitedLocationItem>,
+    scannerScreenState: ScannerScreenState,
     onScanPressed: () -> Unit,
+    resetScreenState: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     var openBottomSheet by rememberSaveable { mutableStateOf(false) }
     val coroutineScope = rememberCoroutineScope()
     var selectedLocation by remember { mutableStateOf(visitedLocations.firstOrNull()) }
+    val context = LocalContext.current
+    LaunchedEffect(key1 = scannerScreenState) {
+        if (scannerScreenState is ScannerScreenState.Success) {
+            selectedLocation = scannerScreenState.location
+            coroutineScope.launch {
+                openBottomSheet = true
+                sheetState.expand()
+            }
+            resetScreenState()
+        }
+    }
+
+    when (scannerScreenState) {
+        is ScannerScreenState.Error -> {
+            Toast.makeText(
+                context,
+                stringResource(id = R.string.failed_to_verify_location),
+                Toast.LENGTH_LONG
+            ).show()
+            resetScreenState()
+        }
+        else -> {}
+    }
 
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(horizontal = 20.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Bottom
     ) {
+        Text(
+            text = stringResource(id = R.string.locations_title),
+            style = MaterialTheme.typography.headlineSmall
+        )
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(10.dp)
                 .weight(1f)
         ) {
             items(visitedLocations) { location ->
@@ -78,6 +123,18 @@ fun ScannerScreen(
                         sheetState.expand()
                     }
                 })
+            }
+
+        }
+        if (visitedLocations.isEmpty()) {
+            Column(
+                modifier
+                    .fillMaxSize()
+                    .weight(10f),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                Text(stringResource(id = R.string.locations_nothing_visited))
             }
         }
         Button(modifier = Modifier.padding(bottom = 40.dp), onClick = onScanPressed) {
@@ -121,30 +178,42 @@ fun VisitedLocationItem(
 ) {
     Card(modifier = modifier
         .fillMaxWidth()
-        .padding(horizontal = 8.dp, vertical = 8.dp)
-        .height(IntrinsicSize.Min)
-        , onClick = {onClick(item)}) {
+        .padding(vertical = 8.dp)
+        .height(IntrinsicSize.Min), onClick = { onClick(item) }) {
         Row(
             modifier = Modifier.fillMaxSize(),
             verticalAlignment = Alignment.CenterVertically
         ) {
+            val painter = rememberAsyncImagePainter(item.photoUrl)
+            val state = painter.state
 
-            AsyncImage(
-                modifier = Modifier
-                    .padding(horizontal = 8.dp)
-                    .size(80.dp),
-                model = item.photoUrl,
-                contentDescription = null
+            val transition by animateFloatAsState(
+                targetValue = if (state is AsyncImagePainter.State.Success) 1f else 0f
             )
+            Image(
+                painter = painter,
+                contentDescription = "custom transition based on painter state",
+                modifier = Modifier
+                    .alpha(transition)
+                    .size(80.dp), contentScale = ContentScale.FillBounds
+            )
+
+//            AsyncImage(
+//                modifier = Modifier
+//                    .padding(horizontal = 8.dp)
+//                    .size(80.dp),
+//                model = item.photoUrl,
+//                contentDescription = null
+//            )
             Column(
                 modifier = modifier
-                    .padding(horizontal = 8.dp)
+                    .padding(horizontal = 10.dp)
                     .weight(1f)
             ) {
                 Text(
                     text = item.name,
                     fontSize = 18.sp,
-                    maxLines = 1,
+                    maxLines = 2,
                     overflow = TextOverflow.Ellipsis
                 )
                 Text(

@@ -37,6 +37,10 @@ class ScannerViewModel @Inject constructor(private val locationsRepository: Loca
         SharingStarted.WhileSubscribed(5000), listOf()
     )
 
+    fun resetScannerScreenState(){
+        _scannerScreenState.update { ScannerScreenState.Default }
+    }
+
     val options = GmsBarcodeScannerOptions.Builder()
         .setBarcodeFormats(
             Barcode.FORMAT_QR_CODE,
@@ -48,8 +52,12 @@ class ScannerViewModel @Inject constructor(private val locationsRepository: Loca
         viewModelScope.launch {
             _scannerScreenState.update { ScannerScreenState.Loading }
             when(val result  = locationsRepository.addVisitedLocation(locationId)){
-                is ApiState.Failed -> ScannerScreenState.Error(result.message)
-                is ApiState.Success -> ScannerScreenState.Success(result.data)
+                is ApiState.Failed ->_scannerScreenState.update{ScannerScreenState.Error(result.message)}
+                is ApiState.Success -> {
+                    with(result.data){
+                        _scannerScreenState.update {ScannerScreenState.Success(VisitedLocationItem(this.id,this.locationName,this.locationDescription, this.photoUrl))}
+                    }
+                }
             }
         }
     }
@@ -59,6 +67,6 @@ class ScannerViewModel @Inject constructor(private val locationsRepository: Loca
 sealed interface ScannerScreenState {
     object Default: ScannerScreenState
     object Loading: ScannerScreenState
-    data class Success(val location: LocationEntity): ScannerScreenState
+    data class Success(val location: VisitedLocationItem): ScannerScreenState
     data class Error(@StringRes val string: Int): ScannerScreenState
 }

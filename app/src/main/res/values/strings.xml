@@ -2,6 +2,8 @@
     <string name="app_name">TimiEu2023</string>
     <string name="home">Home</string>
     <string name="scanner">Hunt</string>
+    <string name="locations_title">These are the locations you visited so far</string>
+    <string name="locations_nothing_visited">Looks like you did not visit anything yet :(</string>
     <string name="map">Map</string>
     <string name="acount">Account</string>
     <string name="lets_start">Let\'s Start</string>
@@ -17,4 +19,5 @@
     <string name="scan_qr_button">Scan QR code</string>
     <string name="failed_confirm_visit">There was a problem validating your scan</string>
     <string name="location_image_description">Image of the location</string>
+    <string name="failed_to_verify_location">Failed to verify the visited location</string>
 </resources>
