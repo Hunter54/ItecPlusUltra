@@ -5,12 +5,11 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.example.timieu2023.features.onboarding.presentation.OnboardingScreen
 import com.example.timieu2023.ui.theme.TimiEu2023Theme
 import kotlinx.coroutines.delay
 import dagger.hilt.android.AndroidEntryPoint
@@ -48,13 +47,17 @@ fun SplashScreen(onDataLoaded: () -> Unit) {
     }
 
     if(!fakeLoading) {
-        MainScreen("Android")
+        OnboardingScreen(
+            onButtonClicked = {
+//                MainScreen()
+            }
+        )
     }
 }
          
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun MainScreen(name: String, appState: AppState = rememberAppState()) {
+fun MainScreen(appState: AppState = rememberAppState()) {
     val navController = appState.navController
     Scaffold(bottomBar = {
         BrivoAccessBottomNavigation(navController,
