@@ -11,6 +11,7 @@ data class EventEntity(
     @ColumnInfo(name = "event_name") val eventName: String?,
     @ColumnInfo(name = "event_description") val eventDescription: String?,
     @ColumnInfo(name = "event_category") val eventCategory: String?,
+    @ColumnInfo(name = "event_location_name") val eventLocationName: String?,
     @ColumnInfo(name = "event_date") val eventDate : String?,
     @ColumnInfo(name = "event_time") val eventTime: String?,
     @ColumnInfo(name = "event_photo_url") val photoUrl: String?

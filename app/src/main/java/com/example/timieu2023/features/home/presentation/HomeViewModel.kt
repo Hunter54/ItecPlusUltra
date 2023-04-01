@@ -41,7 +41,10 @@ class HomeViewModel @Inject constructor(
                     eventName = it.eventName,
                     eventCategory = it.eventCategory,
                     eventDescription = it.eventDescription,
-                    imageRef = it.photoUrl
+                    imageRef = it.photoUrl,
+                    eventDate = it.eventDate,
+                    eventTime = it.eventTime,
+                    eventNameLocation = it.eventLocationName,
                 )
             }
         }.stateIn(

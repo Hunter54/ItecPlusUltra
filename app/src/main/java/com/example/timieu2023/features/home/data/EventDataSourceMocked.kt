@@ -1,37 +1,78 @@
 package com.example.timieu2023.features.home.data
 
-import com.example.timieu2023.features.home.data.enum.EventCategory
-
 class EventDataSourceMocked() : EventDataSource {
     override suspend fun getAllEvents(): List<EventDTO> {
         return listOf<EventDTO>(
             EventDTO(
                 id = "Event1",
-                eventName = "Roses Park",
+                eventName = "Analog Mania XI Opening Weekend",
                 eventDescription = "Built in 1929 and arranged as \"English gardens\" the Roses park was for decades an iconic place of Timisoara.",
                 eventCategory = "",
-                eventDate = null,
-                eventTime = null,
-                photoUrl = "https://www.presadetimis.ro/wp-content/uploads/2023/03/WhatsApp-Image-2023-03-24-at-14.16.06.jpeg"
+                eventLocationName = "Timisoara Students' House of Culture",
+                eventDate = "April 2 2023,",
+                eventTime = "18:00 pm",
+                photoUrl = "https://timisoara2023.eu/media/images/27905aaa-1d42-4649-b2e0-93b2a97495d0.width-640.jpg"
             ),
             EventDTO(
                 id = "Event2",
-                eventName = "Roses Park",
-                eventDescription = "Built in 1929 and arranged as \"English gardens\" the Roses park was for decades an iconic place of Timisoara.",
+                eventName = "Treasure Hunt „La UVT, Cultura este Capitală!”",
+                eventDescription = "",
                 eventCategory = "",
-                eventDate = null,
-                eventTime = null,
-                photoUrl = "https://www.presadetimis.ro/wp-content/uploads/2023/03/WhatsApp-Image-2023-03-24-at-14.16.06.jpeg"
+                eventLocationName = "Timisoara Students' House of Culture",
+                eventDate = "April 6 2023,",
+                eventTime = "10:00 am",
+                photoUrl = "https://timisoara2023.eu/media/images/220a68ab-aeec-48aa-9348-3f197e57eaca.width-640.jpg"
             ),
             EventDTO(
                 id = "Event3",
-                eventName = "Roses Park",
-                eventDescription = "Built in 1929 and arranged as \"English gardens\" the Roses park was for decades an iconic place of Timisoara.",
+                eventName = "Science & Imagination Caravan",
+                eventDescription = "",
                 eventCategory = "",
-                eventDate = null,
-                eventTime = null,
-                photoUrl = "https://www.presadetimis.ro/wp-content/uploads/2023/03/WhatsApp-Image-2023-03-24-at-14.16.06.jpeg"
-            )
+                eventLocationName = "Timisoara Students' House of Culture",
+                eventDate = "April 7 2023,",
+                eventTime = "15:00 pm",
+                photoUrl = "https://timisoara2023.eu/media/images/74600d5d-61f3-4c4c-93e7-6b3a62608ebb.width-640.jpg"
+            ),
+            EventDTO(
+                id = "Event4",
+                eventName = "Cargo Berlin – Timișoara",
+                eventDescription = "",
+                eventCategory = "",
+                eventLocationName = "Bastionul Maria Theresia",
+                eventDate = "April 7 2023,",
+                eventTime = "19:00 pm",
+                photoUrl = "https://timisoara2023.eu/media/images/801d3ca1-07fd-4b02-bd19-10579d816664.width-640.jpg"
+            ),
+            EventDTO(
+                id = "Event5",
+                eventName = "CODRU Planting",
+                eventDescription = "",
+                eventCategory = "",
+                eventLocationName = "Două Dealuri",
+                eventDate = "April 8 2023,",
+                eventTime = "10:00 am",
+                photoUrl = "https://timisoara2023.eu/media/images/8fcfce87-f1df-4088-9694-b1a49453c4d8.width-640.png"
+            ),
+            EventDTO(
+                id = "Event6",
+                eventName = "Ideas that change the world",
+                eventDescription = "",
+                eventCategory = "",
+                eventLocationName = "West University of Timisoara - Aula Magna",
+                eventDate = "April 11 2023,",
+                eventTime = "10:00 am",
+                photoUrl = "https://timisoara2023.eu/media/images/d4e74dc0-26d5-4b83-b877-7a739d5cd8b3.width-640.jpg"
+            ),
+            EventDTO(
+                id = "Event7",
+                eventName = "Gypsy Groove",
+                eventDescription = "",
+                eventCategory = "",
+                eventLocationName = "Liberty Square",
+                eventDate = "April 22 2023,",
+                eventTime = "20:00 pm",
+                photoUrl = "https://timisoara2023.eu/media/images/21e8aebe-5b7d-4ee8-809d-95dec0480ac8.width-640.jpg"
+            ),
         )
     }
 }

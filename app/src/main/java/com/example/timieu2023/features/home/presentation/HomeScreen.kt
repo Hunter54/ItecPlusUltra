@@ -2,13 +2,18 @@ package com.example.timieu2023.features.home.presentation
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
@@ -193,7 +198,7 @@ fun DestinationsTitle(
     modifier: Modifier = Modifier
 ) {
     Text(
-        text = "All Destination",
+        text = "All Events",
         fontSize = 22.sp,
         fontWeight = FontWeight.Bold,
         modifier = modifier.padding(start = 16.dp, top = 4.dp, bottom = 4.dp)
@@ -205,9 +210,13 @@ fun DestinationsTab(
     modifier: Modifier = Modifier,
     events: List<EventViewData>,
 ) {
-    LazyRow() {
-        items(events) { destination ->
-            EventItem(destination)
+    BoxWithConstraints(
+        modifier = modifier.height(500.dp),
+    ) {
+        LazyColumn() {
+            items(events) { destination ->
+                EventItem(destination)
+            }
         }
     }
 }
@@ -217,16 +226,23 @@ fun EventItem(
     event: EventViewData,
     modifier: Modifier = Modifier
 ) {
+
     Card(
-        modifier = modifier.padding(8.dp)
+        modifier = modifier
+            .padding(top = 12.dp, start = 16.dp, end = 16.dp)
+            .height(140.dp)
+            .fillMaxWidth(),
+
     ) {
         Row(
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center,
+            modifier = modifier.fillMaxHeight()
         ) {
             AsyncImage(
                 modifier = modifier
                     .width(100.dp)
-                    .padding(start = 16.dp, top = 30.dp, bottom = 30.dp)
+                    .padding(start = 16.dp)
                     .border(
                         width = 3.dp, brush = Brush.horizontalGradient(
                             colors = listOf(
@@ -237,15 +253,41 @@ fun EventItem(
                         shape = RoundedCornerShape(5.dp)
                     ),
                 model = event.imageRef,
-                contentDescription = null
+                contentDescription = null,
+                alignment = Alignment.CenterStart
             )
-            Text(
-                text = event.eventName.toString(),
-                fontSize = 16.sp,
-                fontWeight = FontWeight.Medium,
-                textAlign = TextAlign.Center,
-                modifier = modifier.padding(start = 16.dp, end = 16.dp)
-            )
+            Column() {
+                Text(
+                    text = event.eventName.toString(),
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Start,
+                    modifier = modifier.padding(start = 16.dp, end = 16.dp, top = 8.dp)
+                )
+                Row {
+                    Text(
+                        text = event.eventDate.toString(),
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Normal,
+                        textAlign = TextAlign.Center,
+                        modifier = modifier.padding(start = 16.dp)
+                    )
+                    Text(
+                        text = event.eventTime.toString(),
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Normal,
+                        textAlign = TextAlign.Center,
+                        modifier = modifier.padding(end = 8.dp)
+                    )
+                }
+                Text(
+                    text = event.eventNameLocation.toString(),
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Normal,
+                    textAlign = TextAlign.Start,
+                    modifier = modifier.padding(start = 16.dp, end = 16.dp, top = 4.dp, bottom = 8.dp)
+                )
+            }
         }
     }
 }

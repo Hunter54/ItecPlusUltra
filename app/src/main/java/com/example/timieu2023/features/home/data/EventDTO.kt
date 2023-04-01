@@ -8,6 +8,7 @@ data class EventDTO(
     val eventName: String?,
     val eventDescription: String?,
     val eventCategory: String?,
+    val eventLocationName: String?,
     val eventDate: String?,
     val eventTime: String?,
     val photoUrl: String?
@@ -18,6 +19,7 @@ data class EventDTO(
             this.eventName,
             this.eventDescription,
             this.eventCategory,
+            this.eventLocationName,
             this.eventDate,
             this.eventTime,
             this.photoUrl
