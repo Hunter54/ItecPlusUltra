@@ -22,8 +22,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         installSplashScreen().setKeepOnScreenCondition{ keepSplashOpened }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S){
-            val splashScreen = installSplashScreen()
-
+            installSplashScreen()
         }
         setContent {
             TimiEu2023Theme {
@@ -41,6 +40,7 @@ class MainActivity : ComponentActivity() {
 fun SplashScreen(onDataLoaded: () -> Unit) {
     var fakeLoading by remember { mutableStateOf(true) }
     var showMainScreen by remember { mutableStateOf(false) }
+    var pickYourFavoritesScreen by remember { mutableStateOf(false) }
     LaunchedEffect(key1 = Unit) {
         delay(2000)
         fakeLoading = false
@@ -48,12 +48,14 @@ fun SplashScreen(onDataLoaded: () -> Unit) {
     }
 
     if(!fakeLoading) {
-        if(showMainScreen) {
-            MainScreen()
+        if(pickYourFavoritesScreen) {
+            //MainScreen()
+            PickYourFavoritesScreen()
         } else {
             OnboardingScreen(
                 onButtonClicked = {
-                    showMainScreen = true
+                    //showMainScreen = true
+                    pickYourFavoritesScreen = true
                 }
             )
         }
