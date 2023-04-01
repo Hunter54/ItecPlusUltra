@@ -17,6 +17,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.timieu2023.R
+import androidx.compose.runtime.getValue
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.timieu2023.ui.theme.TimiEu2023Theme
 
 var favoritesMap: MutableMap<String, Boolean> = mutableMapOf(
@@ -28,10 +30,13 @@ var favoritesMap: MutableMap<String, Boolean> = mutableMapOf(
     "Science Fiction" to false
 )
 
-var filteredFavorites = mutableListOf<String>()
+val filteredFavorites = mutableStateListOf<String>()
 
 @Composable
-fun PickYourFavoritesScreen(onContinueButtonClicked: () -> Unit) {
+fun PickYourFavoritesScreen(
+    onContinueButtonClicked: () -> Unit,
+    pickYourFavoritesViewModel: PickYourFavoritesViewModel = hiltViewModel()
+) {
     TimiEu2023Theme {
         Surface(
             modifier = Modifier.fillMaxSize(),

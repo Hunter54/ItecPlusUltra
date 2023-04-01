@@ -83,6 +83,7 @@ dependencies {
     implementation(libs.kotlinx.serialization)
     implementation(libs.maps)
     implementation(libs.playServicesMaps)
+    implementation(libs.datastore)
     kapt(libs.google.hiltandroidcompiler)
     testImplementation(libs.junit)
     testImplementation(libs.androidx.test.junit)

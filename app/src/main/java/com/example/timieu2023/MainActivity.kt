@@ -64,19 +64,16 @@ fun SplashScreen(onDataLoaded: () -> Unit) {
         }
     }
     if(showMainScreen) {
-        MainScreen(
-            favoritesSections = filteredFavorites
-        )
+        MainScreen()
     }
 }
          
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun MainScreen(
-    favoritesSections: List<String>,
-    appState: AppState = rememberAppState()
+    appState: AppState = rememberAppState(),
 ) {
-    println("cata $favoritesSections")
+
     val navController = appState.navController
     Scaffold(bottomBar = {
         BrivoAccessBottomNavigation(navController,
