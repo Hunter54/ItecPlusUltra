@@ -78,6 +78,8 @@ dependencies {
     implementation(libs.media3Ui)
     implementation(libs.media3Session)
     implementation(libs.kotlinx.serialization)
+    implementation(libs.maps)
+    implementation(libs.playServicesMaps)
     kapt(libs.google.hiltandroidcompiler)
     testImplementation(libs.junit)
     testImplementation(libs.androidx.test.junit)
