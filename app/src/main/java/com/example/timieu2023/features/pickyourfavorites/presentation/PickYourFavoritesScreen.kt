@@ -41,45 +41,48 @@ fun PickYourFavoritesScreen(
         Surface(
             modifier = Modifier.fillMaxSize(),
         ) {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(
-                    text = stringResource(id = R.string.pick_your_favorites),
-                    modifier = Modifier
-                        .padding(top = 200.dp)
-                        .fillMaxWidth(),
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 30.sp,
-                    textAlign = TextAlign.Center,
-                )
+           BoxWithConstraints(
+               modifier = Modifier.fillMaxSize()
+           ) {
                 Column(
-                    modifier = Modifier.padding(top = 40.dp),
+                    modifier = Modifier.padding(top = maxHeight / 5),
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    FirstRow()
-                    SecondRow()
-                    ThirdRow()
-                }
-                Box(
-                    modifier = Modifier.padding(top = 100.dp)
-                ) {
-                    Button(
-                        modifier = Modifier
-                            .width(250.dp)
-                            .height(50.dp),
-                        onClick = {
-                            filterFavoritesSections()
-                            pickYourFavoritesViewModel.filteredFavorites = filteredFavorites
-                            pickYourFavoritesViewModel.addDataToDataStore()
-                            onContinueButtonClicked()
-                            filteredFavorites.clear()
-                        },
+                    Text(
+                        text = stringResource(id = R.string.pick_your_favorites),
+                        modifier = Modifier.fillMaxWidth(),
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 30.sp,
+                        textAlign = TextAlign.Center,
+                    )
+                    Column(
+                        modifier = Modifier.padding(top = 40.dp),
                     ) {
-                        Text(text = stringResource(id = R.string.continue_pick_your_favorites))
-                        Icon(
-                            imageVector = Icons.Filled.KeyboardArrowRight,
-                            contentDescription = null
-                        )
+                        FirstRow()
+                        SecondRow()
+                        ThirdRow()
+                    }
+                    Box(
+                        modifier = Modifier.padding(top = 100.dp)
+                    ) {
+                        Button(
+                            modifier = Modifier
+                                .width(250.dp)
+                                .height(50.dp),
+                            onClick = {
+                                filterFavoritesSections()
+                                pickYourFavoritesViewModel.filteredFavorites = filteredFavorites
+                                pickYourFavoritesViewModel.addDataToDataStore()
+                                onContinueButtonClicked()
+                                filteredFavorites.clear()
+                            },
+                        ) {
+                            Text(text = stringResource(id = R.string.continue_pick_your_favorites))
+                            Icon(
+                                imageVector = Icons.Filled.KeyboardArrowRight,
+                                contentDescription = null
+                            )
+                        }
                     }
                 }
             }
@@ -214,7 +217,7 @@ fun ThirdRow() {
         modifier = Modifier.padding(start = 20.dp, end = 25.dp)
     ) {
         Row(
-            modifier = Modifier.padding(top = 40.dp),
+            modifier = Modifier.padding(top = 60.dp),
             horizontalArrangement = Arrangement.Center
         ) {
             FilterChip(
