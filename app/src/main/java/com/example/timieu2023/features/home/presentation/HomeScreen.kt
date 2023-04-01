@@ -1,27 +1,22 @@
 package com.example.timieu2023.features.home.presentation
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraints
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Place
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -45,7 +40,6 @@ import coil.compose.AsyncImage
 import com.example.timieu2023.features.home.domain.EventViewData
 import com.example.timieu2023.features.home.presentation.weather.WeatherCard
 import com.example.timieu2023.features.home.presentation.weather.WeatherState
-import com.example.timieu2023.features.pickyourfavorites.presentation.PickYourFavoritesViewModel
 
 @Composable
 fun HomeTabRoute(
@@ -71,9 +65,6 @@ fun HomeTabScreen(
     onQueryChange: (String) -> Unit,
     query: String,
     weatherState: WeatherState,
-    destinations: List<DestinationViewData>,
-    modifier: Modifier = Modifier,
-    pickYourFavoritesViewModel: PickYourFavoritesViewModel = hiltViewModel()
     events: List<EventViewData>,
     modifier: Modifier = Modifier
 ) {
@@ -215,13 +206,10 @@ fun DestinationsTab(
     modifier: Modifier = Modifier,
     events: List<EventViewData>,
 ) {
-    LazyRow {
-        items(destinations) { destination ->
-            DestinationItem(destination)
     BoxWithConstraints(
         modifier = modifier.height(500.dp),
     ) {
-        LazyColumn() {
+        LazyColumn {
             items(events) { destination ->
                 EventItem(destination)
             }
@@ -241,7 +229,7 @@ fun EventItem(
             .height(140.dp)
             .fillMaxWidth(),
 
-    ) {
+        ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center,
@@ -264,7 +252,7 @@ fun EventItem(
                 contentDescription = null,
                 alignment = Alignment.CenterStart
             )
-            Column() {
+            Column {
                 Text(
                     text = event.eventName.toString(),
                     fontSize = 20.sp,
@@ -293,11 +281,17 @@ fun EventItem(
                     fontSize = 14.sp,
                     fontWeight = FontWeight.Normal,
                     textAlign = TextAlign.Start,
-                    modifier = modifier.padding(start = 16.dp, end = 16.dp, top = 4.dp, bottom = 8.dp)
+                    modifier = modifier.padding(
+                        start = 16.dp,
+                        end = 16.dp,
+                        top = 4.dp,
+                        bottom = 8.dp
+                    )
                 )
             }
         }
     }
 }
+
 
 
