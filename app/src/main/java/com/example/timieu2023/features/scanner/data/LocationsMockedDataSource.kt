@@ -19,6 +19,42 @@ class LocationsMockedDataSource : LocationsDataSource {
                 21.224463,
                 45.750974,
                 photoUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Timi%C8%99oara_Orthodox_Cathedral.jpg/440px-Timi%C8%99oara_Orthodox_Cathedral.jpg"
+            ),
+            LocationDto(
+                "12345679",
+                "Roses Park",
+                "Roses Park, previously known as Rosarium or Ștefan Plavăț Park of Culture and Leisure, is an urban park in Timișoara, located north of the Bega River. he park was established and opened in 1891 on the occasion of the Agro-Industrial Exhibition in Southern Hungary. The floral arrangements were made by gardeners Wilhelm Mühle, Franz Niemetz and Benő Agátsy and were also visited by Emperor Franz Joseph. The park bore the emperor's name, but after World War I it was renamed Rosarium. ",
+                21.234312,
+                45.750527,
+                photoUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Parcul_Rozelor_Timisoara_-_entrance.jpg/600px-Parcul_Rozelor_Timisoara_-_entrance.jpg"
+            ),
+            LocationDto("12345677",
+            "Timișoara Art Museum",
+            "he Baroque Palace is a monumental palace in the historic centre of the Romanian city of Timișoara. One of the representative buildings of 18th-century Timișoara, the Baroque Palace today houses the city's National Museum of Art. The richly decorated palace consists of two floors and a mansard, as well as two entrance gates designed in the Viennese Baroque style. The Baroque Hall on the first floor hosted festivities occasioned by the visit of emperors (Joseph II, Franz Joseph I, etc.), kings (Ferdinand I, etc.) and prelates, as well as important cultural figures (such as musicians Franz Liszt, Johannes Brahms, Pablo Sarasate, George Enescu, etc.)",
+                21.229336,
+                45.757492,
+                photoUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Timi%C8%99oara_-_Palatul_Vechii_Prefecturi_%2844188365354%29.jpg/500px-Timi%C8%99oara_-_Palatul_Vechii_Prefecturi_%2844188365354%29.jpg"
+            ),
+            LocationDto("12345676",
+            "St. George Cathedral",
+            "The St. George Cathedral, colloquially known as the Roman Catholic Dome, is the cathedral of the Roman Catholic Diocese of Timișoara and one of the city's landmarks. The cathedral is dedicated to St. George and was built between 1736 and 1774. After the Cathedral Basilica of Oradea, it is the second largest Baroque religious building in Southeastern Europe. Liturgies in Hungarian, German and Romanian are currently held regularly in the cathedral. Due to the remarkable acoustics, organ concerts are also held here. ",
+                21.229922,
+                45.758166,
+                photoUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Temi%C5%A1var%2C_Rumunija_37.jpg/440px-Temi%C5%A1var%2C_Rumunija_37.jpg"
+            ),
+            LocationDto("12345675",
+            "Serbian Church",
+                "The Ascension Cathedral, commonly known as the Serbian Orthodox Cathedral, is the cathedral of the Serbian Orthodox Eparchy of Timișoara. Located in the Union Square of Cetate district, the building is one of the three Serbian Orthodox churches in the city together with the St. George Church in Fabric district and the St. Nicholas Church in the Avram Iancu Square of Mehala district.",
+                21.228141,
+                45.757960,
+                photoUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Pia%C5%A3a_Unirii_-_panoramio_%286%29.jpg/440px-Pia%C5%A3a_Unirii_-_panoramio_%286%29.jpg"
+            ),
+            LocationDto("12345674",
+            "Iosefin Water Tower",
+            "The Iosefin Water Tower is an industrial monument in Timișoara, Romania. It was one of the sources of water supply in Timișoara at the beginning of the 20th century. It is classified as a national heritage site. The Iosefin Water Tower was built between December 1912 and September 1913 by the Budapest company of János Lenarduzzi, as part of the drinking water distribution network of Timișoara, which also included its twin water tower in Fabric.",
+                21.201899,
+                45.745479,
+                photoUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Water_tower_in_Iosefin.jpg/440px-Water_tower_in_Iosefin.jpg"
             )
         )
     }
