@@ -12,6 +12,7 @@ import com.example.timieu2023.features.home.data.AppDatabase
 import com.example.timieu2023.features.home.data.EventDao
 import com.example.timieu2023.features.home.data.EventDataSource
 import com.example.timieu2023.features.home.data.EventDataSourceMocked
+import com.example.timieu2023.features.home.data.EventRepository
 import com.example.timieu2023.features.home.data.WeatherApi
 import com.example.timieu2023.features.home.data.WeatherRepositoryImpl
 import com.example.timieu2023.features.home.data.serializaer.kotlinxConverterFactory
@@ -79,6 +80,12 @@ object AppModule {
     @Provides
     fun provideLocationsRepository(locationsDao: LocationsDao, locationsDataSource: LocationsDataSource): LocationsRepository {
         return LocationsRepository(locationsDao,locationsDataSource)
+    }
+
+    @Singleton
+    @Provides
+    fun provideEventsRepository(eventDao: EventDao, eventDataSource: EventDataSource): EventRepository {
+        return EventRepository(eventDao, eventDataSource)
     }
 
     @Singleton

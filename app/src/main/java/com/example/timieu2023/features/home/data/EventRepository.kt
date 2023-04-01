@@ -10,13 +10,9 @@ import javax.inject.Inject
 class EventRepository @Inject constructor(
     private val eventDao: EventDao,
     private val eventDataSource: EventDataSource,
-    applicationScope: CoroutineScope
 ) {
 
-    val events = eventDao.getAll().map {
-        it
-        //TODO maybe create a UI data model here
-    }.stateIn(applicationScope, started = SharingStarted.WhileSubscribed(5000), listOf())
+    val events = eventDao.getAll()
 
     suspend fun getEvent(id: String): EventEntity {
         return eventDao.getEventById(id)

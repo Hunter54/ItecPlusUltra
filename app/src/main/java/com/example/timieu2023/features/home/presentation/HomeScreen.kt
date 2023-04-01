@@ -1,17 +1,13 @@
 package com.example.timieu2023.features.home.presentation
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.gestures.Orientation
-import androidx.compose.foundation.gestures.ScrollableState
-import androidx.compose.foundation.gestures.scrollable
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -24,7 +20,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Place
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Card
@@ -36,17 +31,17 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.timieu2023.features.home.domain.DestinationViewData
+import coil.compose.AsyncImage
+import com.example.timieu2023.features.home.domain.EventViewData
 import com.example.timieu2023.features.home.presentation.weather.WeatherCard
 import com.example.timieu2023.features.home.presentation.weather.WeatherState
 
@@ -56,6 +51,7 @@ fun HomeTabRoute(
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val homeState by viewModel.state.collectAsState()
+    val events by viewModel.events.collectAsState()
 
     HomeTabScreen(
         onQueryChange = { query ->
@@ -63,7 +59,7 @@ fun HomeTabRoute(
         },
         homeState.query,
         weatherState = homeState.weatherState,
-        destinations = homeState.destinations,
+        events = events,
         modifier,
     )
 }
@@ -73,7 +69,7 @@ fun HomeTabScreen(
     onQueryChange: (String) -> Unit,
     query: String,
     weatherState: WeatherState,
-    destinations: List<DestinationViewData>,
+    events: List<EventViewData>,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -95,7 +91,7 @@ fun HomeTabScreen(
         HomeWeatherTab(weatherState = weatherState)
         DestinationsTitle()
         DestinationsTab(
-            destinations = destinations
+            events = events
         )
         Spacer(modifier = modifier.padding(bottom = 8.dp))
     }
@@ -202,7 +198,7 @@ fun DestinationsTitle(
     modifier: Modifier = Modifier
 ) {
     Text(
-        text = "All Destination",
+        text = "All Events",
         fontSize = 22.sp,
         fontWeight = FontWeight.Bold,
         modifier = modifier.padding(start = 16.dp, top = 4.dp, bottom = 4.dp)
@@ -212,40 +208,86 @@ fun DestinationsTitle(
 @Composable
 fun DestinationsTab(
     modifier: Modifier = Modifier,
-    destinations: List<DestinationViewData>,
+    events: List<EventViewData>,
 ) {
-    LazyRow() {
-        items(destinations) { destination ->
-            DestinationItem(destination)
+    BoxWithConstraints(
+        modifier = modifier.height(500.dp),
+    ) {
+        LazyColumn() {
+            items(events) { destination ->
+                EventItem(destination)
+            }
         }
     }
 }
 
 @Composable
-fun DestinationItem(
-    destination: DestinationViewData,
+fun EventItem(
+    event: EventViewData,
     modifier: Modifier = Modifier
 ) {
+
     Card(
-        modifier = modifier.padding(8.dp)
+        modifier = modifier
+            .padding(top = 12.dp, start = 16.dp, end = 16.dp)
+            .height(140.dp)
+            .fillMaxWidth(),
+
     ) {
         Row(
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center,
+            modifier = modifier.fillMaxHeight()
         ) {
-            Image(
-                imageVector = Icons.Filled.Place, contentDescription = null,
+            AsyncImage(
                 modifier = modifier
-                    .height(150.dp)
                     .width(100.dp)
-                    .padding(top = 8.dp, bottom = 8.dp)
+                    .padding(start = 16.dp)
+                    .border(
+                        width = 3.dp, brush = Brush.horizontalGradient(
+                            colors = listOf(
+                                MaterialTheme.colorScheme.tertiary,
+                                MaterialTheme.colorScheme.secondary
+                            )
+                        ),
+                        shape = RoundedCornerShape(5.dp)
+                    ),
+                model = event.imageRef,
+                contentDescription = null,
+                alignment = Alignment.CenterStart
             )
-            Text(
-                text = "Borobudur Temple",
-                fontSize = 16.sp,
-                fontWeight = FontWeight.Medium,
-                textAlign = TextAlign.Center,
-                modifier = modifier.padding(start = 16.dp, end = 16.dp)
-            )
+            Column() {
+                Text(
+                    text = event.eventName.toString(),
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Start,
+                    modifier = modifier.padding(start = 16.dp, end = 16.dp, top = 8.dp)
+                )
+                Row {
+                    Text(
+                        text = event.eventDate.toString(),
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Normal,
+                        textAlign = TextAlign.Center,
+                        modifier = modifier.padding(start = 16.dp)
+                    )
+                    Text(
+                        text = event.eventTime.toString(),
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Normal,
+                        textAlign = TextAlign.Center,
+                        modifier = modifier.padding(end = 8.dp)
+                    )
+                }
+                Text(
+                    text = event.eventNameLocation.toString(),
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Normal,
+                    textAlign = TextAlign.Start,
+                    modifier = modifier.padding(start = 16.dp, end = 16.dp, top = 4.dp, bottom = 8.dp)
+                )
+            }
         }
     }
 }
