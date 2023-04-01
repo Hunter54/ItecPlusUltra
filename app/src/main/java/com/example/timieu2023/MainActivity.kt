@@ -10,6 +10,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.example.timieu2023.ui.theme.TimiEu2023Theme
 import kotlinx.coroutines.delay
@@ -23,7 +24,7 @@ class MainActivity : ComponentActivity() {
         installSplashScreen().setKeepOnScreenCondition{ keepSplashOpened }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S){
             val splashScreen = installSplashScreen()
-            splashScreen.setKeepOnScreenCondition { true }
+            splashScreen.setKeepOnScreenCondition { false }
         }
         setContent {
             TimiEu2023Theme {
