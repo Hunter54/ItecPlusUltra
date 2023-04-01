@@ -1,6 +1,9 @@
 package com.example.timieu2023.features.home.presentation
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -11,9 +14,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
@@ -44,6 +45,7 @@ import coil.compose.AsyncImage
 import com.example.timieu2023.features.home.domain.EventViewData
 import com.example.timieu2023.features.home.presentation.weather.WeatherCard
 import com.example.timieu2023.features.home.presentation.weather.WeatherState
+import com.example.timieu2023.features.pickyourfavorites.presentation.PickYourFavoritesViewModel
 
 @Composable
 fun HomeTabRoute(
@@ -69,6 +71,9 @@ fun HomeTabScreen(
     onQueryChange: (String) -> Unit,
     query: String,
     weatherState: WeatherState,
+    destinations: List<DestinationViewData>,
+    modifier: Modifier = Modifier,
+    pickYourFavoritesViewModel: PickYourFavoritesViewModel = hiltViewModel()
     events: List<EventViewData>,
     modifier: Modifier = Modifier
 ) {
@@ -136,7 +141,7 @@ fun HomeTopQuestion(
             fontSize = 22.sp,
             fontWeight = FontWeight.Bold
         )
-        Row() {
+        Row {
             Text(
                 text = "going",
                 fontSize = 22.sp,
@@ -210,6 +215,9 @@ fun DestinationsTab(
     modifier: Modifier = Modifier,
     events: List<EventViewData>,
 ) {
+    LazyRow {
+        items(destinations) { destination ->
+            DestinationItem(destination)
     BoxWithConstraints(
         modifier = modifier.height(500.dp),
     ) {

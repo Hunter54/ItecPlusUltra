@@ -2,26 +2,32 @@ package com.example.timieu2023.features.home.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.timieu2023.datastore.DatastoreRepository
+import com.example.timieu2023.features.home.domain.DestinationViewData
 import com.example.timieu2023.features.home.data.EventRepository
 import com.example.timieu2023.features.home.domain.EventViewData
 import com.example.timieu2023.features.home.domain.Resource
 import com.example.timieu2023.features.home.domain.WeatherRepository
 import com.example.timieu2023.features.home.presentation.weather.WeatherState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val weatherRepository: WeatherRepository,
-    private val eventRepository: EventRepository
+    private val datastoreRepository: DatastoreRepository
 ) : ViewModel() {
 
     private val _state =
@@ -32,6 +38,12 @@ class HomeViewModel @Inject constructor(
         loadWeatherInfo()
         viewModelScope.launch {
             eventRepository.refreshEvents()
+        }
+        viewModelScope.launch {
+            datastoreRepository.read("serializedList").debounce(500).collect { result ->
+                val deserializedList = Json.decodeFromString<List<String>>(result)
+                println("cata $deserializedList")
+            }
         }
     }
 
