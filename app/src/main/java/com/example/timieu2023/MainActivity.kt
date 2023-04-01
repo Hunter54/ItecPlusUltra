@@ -22,7 +22,7 @@ class MainActivity : ComponentActivity() {
         installSplashScreen().setKeepOnScreenCondition{ keepSplashOpened }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S){
             val splashScreen = installSplashScreen()
-            splashScreen.setKeepOnScreenCondition { true }
+
         }
         setContent {
             TimiEu2023Theme {
