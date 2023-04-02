@@ -36,4 +36,11 @@ sealed class BottomNavigationItem(
             R.drawable.baseline_explore_24,
             R.string.scanner
         )
+
+    object EventsMap :
+        BottomNavigationItem(
+            "eventsmap",
+            R.drawable.baseline_explore_24,
+            R.string.scanner
+        )
 }

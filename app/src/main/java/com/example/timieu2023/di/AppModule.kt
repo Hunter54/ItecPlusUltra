@@ -8,6 +8,8 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.timieu2023.datastore.DatastoreRepository
 import com.example.timieu2023.datastore.DatastoreRepositoryImpl
+import com.example.timieu2023.features.eventsmap.StringDecoder
+import com.example.timieu2023.features.eventsmap.UriDecoder
 import com.example.timieu2023.features.home.data.AppDatabase
 import com.example.timieu2023.features.home.data.EventDao
 import com.example.timieu2023.features.home.data.EventDataSource
@@ -108,4 +110,9 @@ object AppModule {
         WeatherRepositoryImpl(
             api = weatherApi
         )
+
+    @Singleton
+    @Provides
+    fun bindStringDecoder(): StringDecoder = UriDecoder()
+
 }
