@@ -55,7 +55,13 @@ class LocationsMockedDataSource : LocationsDataSource {
                 21.201899,
                 45.745479,
                 photoUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Water_tower_in_Iosefin.jpg/440px-Water_tower_in_Iosefin.jpg"
-            )
+            ),
+            LocationDto("12345673",
+            "Huniade Castle",
+            "The Huniade Castle is the oldest monument in Timișoara, Romania, built between 1443 and 1447 by John Hunyadi and Paolo Santini de Duccio over the old royal castle dating from the 14th century (built during the reign of Charles I Robert). The castle was rebuilt by the Turkish pashas in the 17th century and by Prince Eugene of Savoy in the 18th century. The structure owes its present appearance to the 1850s reconstruction campaign. It houses the History, Archeology and Natural Sciences sections of the National Museum of Banat.",
+                21.227109,
+                45.753464,
+            photoUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Castelul_Huniazilor.jpg/440px-Castelul_Huniazilor.jpg")
         )
     }
 }
