@@ -18,12 +18,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material3.Card
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.SearchBar
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -37,6 +32,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
+import coil.compose.SubcomposeAsyncImage
 import com.example.timieu2023.features.home.domain.EventViewData
 import com.example.timieu2023.features.home.presentation.weather.WeatherCard
 import com.example.timieu2023.features.home.presentation.weather.WeatherState
@@ -225,7 +221,7 @@ fun EventItem(
             horizontalArrangement = Arrangement.Center,
             modifier = modifier.fillMaxHeight()
         ) {
-            AsyncImage(
+            SubcomposeAsyncImage(
                 modifier = modifier
                     .width(100.dp)
                     .padding(start = 16.dp)
@@ -240,7 +236,7 @@ fun EventItem(
                     ),
                 model = event.imageRef,
                 contentDescription = null,
-                alignment = Alignment.CenterStart
+                alignment = Alignment.CenterStart,
             )
             Column {
                 Text(

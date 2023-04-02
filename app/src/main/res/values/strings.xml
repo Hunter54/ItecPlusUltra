@@ -20,4 +20,5 @@
     <string name="failed_confirm_visit">There was a problem validating your scan</string>
     <string name="location_image_description">Image of the location</string>
     <string name="failed_to_verify_location">Failed to verify the visited location</string>
+    <string name="failed_to_load_image_placeholder">Placeholder image for failed loaded image</string>
 </resources>
