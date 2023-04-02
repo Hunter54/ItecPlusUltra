@@ -40,7 +40,7 @@ fun LocationBottomSheet(
     onDismissRequest: () -> Unit
 ) {
     val scrollState = rememberScrollState()
-    ModalBottomSheet(sheetState = sheetState, onDismissRequest = { onDismissRequest() }) {
+    ModalBottomSheet(modifier = Modifier.offset(y = 20.dp),sheetState = sheetState, onDismissRequest = { onDismissRequest() }) {
         Column(
             modifier = Modifier
                 .padding(start = 24.dp, end = 24.dp, bottom = 10.dp)
