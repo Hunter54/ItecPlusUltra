@@ -4,4 +4,7 @@
     <style name="Theme.TimiEu2023" parent="android:Theme.Material.Light.NoActionBar">
         <item name="android:windowBackground">@color/orange</item>
     </style>
+    <style name="Theme.AppStart.TimiEu2023" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/white</item>
+    </style>
 </resources>

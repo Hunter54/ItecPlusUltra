@@ -108,7 +108,8 @@ fun ScannerScreen(
     ) {
         Text(
             text = stringResource(id = R.string.locations_title),
-            style = MaterialTheme.typography.headlineSmall
+            style = MaterialTheme.typography.headlineMedium,
+            modifier = Modifier.padding(top = 20.dp, bottom = 20.dp)
         )
         LazyColumn(
             modifier = Modifier
