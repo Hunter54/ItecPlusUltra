@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import coil.compose.AsyncImagePainter
+import coil.compose.SubcomposeAsyncImage
 import coil.compose.rememberAsyncImagePainter
 import com.example.timieu2023.R
 import com.example.timieu2023.features.scanner.ScannerScreenState
@@ -185,27 +186,31 @@ fun VisitedLocationItem(
             modifier = Modifier.fillMaxSize(),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            val painter = rememberAsyncImagePainter(item.photoUrl)
-            val state = painter.state
 
-            val transition by animateFloatAsState(
-                targetValue = if (state is AsyncImagePainter.State.Success) 1f else 0f
-            )
-            Image(
-                painter = painter,
-                contentDescription = "custom transition based on painter state",
+            SubcomposeAsyncImage(model = item.photoUrl, contentDescription = null,
                 modifier = Modifier
-                    .alpha(transition)
-                    .size(80.dp), contentScale = ContentScale.FillBounds
-            )
+                    .size(80.dp), contentScale = ContentScale.FillBounds, loading = {
+                    Column(
+                        modifier = Modifier.fillMaxHeight(),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) { CircularProgressIndicator() }
+                }, error = {
+                    Column(
+                        modifier = Modifier.height(100.dp),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Image(
+                            modifier = Modifier.fillMaxHeight(),
+                            painter = painterResource(id = R.drawable.baseline_broken_image_24),
+                            contentDescription = stringResource(
+                                id = R.string.failed_to_load_image_placeholder
+                            ), contentScale = ContentScale.FillBounds
+                        )
+                    }
+                })
 
-//            AsyncImage(
-//                modifier = Modifier
-//                    .padding(horizontal = 8.dp)
-//                    .size(80.dp),
-//                model = item.photoUrl,
-//                contentDescription = null
-//            )
             Column(
                 modifier = modifier
                     .padding(horizontal = 10.dp)
