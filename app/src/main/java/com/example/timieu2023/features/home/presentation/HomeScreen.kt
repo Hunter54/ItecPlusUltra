@@ -70,6 +70,9 @@ fun HomeTabScreen(
     Column(
         modifier = modifier.verticalScroll(rememberScrollState()),
     ) {
+        HomeTopQuestion(
+            modifier
+        )
         HomeSearchField(
             onSearch = {},
             onActiveChange = {},
@@ -77,10 +80,9 @@ fun HomeTabScreen(
             query = query,
             modifier = modifier
         )
-        HomeTopQuestion(
-            modifier
-        )
-        HomeWeatherTab(weatherState = weatherState)
+        if(query.isEmpty()) {
+            HomeWeatherTab(weatherState = weatherState)
+        }
         DestinationsTitle()
         DestinationsTab(
             events = events
@@ -128,13 +130,13 @@ fun HomeTopQuestion(
         modifier.padding(start = 16.dp, top = 8.dp)
     ) {
         Text(
-            text = "Where are you",
+            text = "What are you",
             fontSize = 22.sp,
             fontWeight = FontWeight.Bold
         )
         Row {
             Text(
-                text = "going",
+                text = "doing",
                 fontSize = 22.sp,
                 fontWeight = FontWeight.Bold
             )
@@ -160,7 +162,7 @@ fun HomeWeatherTab(
     modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = modifier
+        modifier = modifier.padding(top = 12.dp)
     ) {
         HomeWeatherTitle()
         WeatherCard(state = weatherState, backgroundColor = Color.White)
@@ -187,7 +189,7 @@ fun DestinationsTitle(
         text = "All Events",
         fontSize = 22.sp,
         fontWeight = FontWeight.Bold,
-        modifier = modifier.padding(start = 16.dp, top = 4.dp, bottom = 4.dp)
+        modifier = modifier.padding(start = 16.dp, top = 8.dp, bottom = 4.dp)
     )
 }
 
