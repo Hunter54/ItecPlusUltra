@@ -10,12 +10,10 @@ import com.example.timieu2023.features.home.domain.WeatherRepository
 import com.example.timieu2023.features.home.presentation.weather.WeatherState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.serialization.decodeFromString
@@ -77,7 +75,8 @@ class HomeViewModel @Inject constructor(
             it.copy(
                 query = changedQuery,
                 filteredListEvents = it.listEvents.filter { event ->
-                    event.eventName?.contains(changedQuery) ?: false
+                    val eventNameLowerCase = event.eventName?.lowercase()
+                    eventNameLowerCase?.contains(changedQuery) ?: false
                 }
             )
         }
