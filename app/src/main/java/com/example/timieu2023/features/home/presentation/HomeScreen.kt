@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -44,6 +45,7 @@ import com.example.timieu2023.features.home.presentation.weather.WeatherState
 @Composable
 fun HomeTabRoute(
     modifier: Modifier = Modifier,
+    onEventClick: (EventViewData) -> Unit,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val homeState by viewModel.state.collectAsState()
@@ -55,6 +57,7 @@ fun HomeTabRoute(
         homeState.query,
         weatherState = homeState.weatherState,
         events = homeState.filteredListEvents,
+        onEventClick = onEventClick,
         modifier,
     )
 }
@@ -65,6 +68,7 @@ fun HomeTabScreen(
     query: String,
     weatherState: WeatherState,
     events: List<EventViewData>,
+    onEventClick: (EventViewData) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -80,12 +84,13 @@ fun HomeTabScreen(
             query = query,
             modifier = modifier
         )
-        if(query.isEmpty()) {
+        if (query.isEmpty()) {
             HomeWeatherTab(weatherState = weatherState)
         }
         DestinationsTitle()
         DestinationsTab(
-            events = events
+            events = events,
+            onEventClick = onEventClick
         )
         Spacer(modifier = modifier.padding(bottom = 8.dp))
     }
@@ -196,6 +201,7 @@ fun DestinationsTitle(
 @Composable
 fun DestinationsTab(
     modifier: Modifier = Modifier,
+    onEventClick: (EventViewData) -> Unit,
     events: List<EventViewData>,
 ) {
     BoxWithConstraints(
@@ -203,7 +209,10 @@ fun DestinationsTab(
     ) {
         LazyColumn {
             items(events) { destination ->
-                EventItem(destination)
+                EventItem(
+                    destination,
+                    onEventClick = onEventClick
+                )
             }
         }
     }
@@ -212,6 +221,7 @@ fun DestinationsTab(
 @Composable
 fun EventItem(
     event: EventViewData,
+    onEventClick: (EventViewData) -> Unit,
     modifier: Modifier = Modifier
 ) {
 
@@ -219,13 +229,16 @@ fun EventItem(
         modifier = modifier
             .padding(top = 12.dp, start = 16.dp, end = 16.dp)
             .height(140.dp)
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .clickable {
+                onEventClick(event)
+            },
 
         ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center,
-            modifier = modifier.fillMaxHeight()
+            modifier = modifier.fillMaxHeight(),
         ) {
             AsyncImage(
                 modifier = modifier
