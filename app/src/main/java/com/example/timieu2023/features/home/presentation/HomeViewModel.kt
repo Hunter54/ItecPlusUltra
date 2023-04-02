@@ -30,7 +30,7 @@ class HomeViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _state =
-        MutableStateFlow<HomeViewState>(HomeViewState(query = "Search destination"))
+        MutableStateFlow<HomeViewState>(HomeViewState(query = ""))
     val state: StateFlow<HomeViewState> = _state
 
     init {

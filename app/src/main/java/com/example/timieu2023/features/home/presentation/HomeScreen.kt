@@ -110,7 +110,11 @@ fun HomeSearchField(
         },
         tonalElevation = 16.dp,
         shape = RoundedCornerShape(16.dp),
-        modifier = modifier.padding(start = 16.dp, end = 16.dp, top = 6.dp)
+
+        modifier = modifier.padding(start = 16.dp, end = 16.dp, top = 6.dp),
+        placeholder = {
+            Text(text = "Search Events..")
+        },
     ) {
 
     }
