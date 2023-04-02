@@ -57,7 +57,9 @@ class HomeViewModel @Inject constructor(
                         eventDate = it.eventDate,
                         eventTime = it.eventTime,
                         eventNameLocation = it.eventLocationName,
-                    )
+                        lat = it.eventLat.toString(),
+                        long = it.eventLong.toString(),
+                        )
                 }
             }.collectLatest { listEvents ->
                 _state.update {

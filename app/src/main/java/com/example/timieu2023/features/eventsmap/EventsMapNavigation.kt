@@ -6,7 +6,6 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.example.timieu2023.features.home.domain.EventViewData
 import com.example.timieu2023.features.maps.presentation.navigation.HomeDestinations
 
 const val LatIdArg = "latId"
@@ -20,6 +19,8 @@ class EventArgs(val lat: String, val long: String) {
         stringDecoder.decodeString(checkNotNull(savedStateHandle[LongIdArg]))
     )
 }
+
+data class EventDetailsArguments(val latId: String, val longId: String)
 
 fun NavController.navigateToEventDetails(lat: String, long: String) {
     this.navigate("${HomeDestinations.EventDetails.route}/$lat&$long")

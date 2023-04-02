@@ -6,6 +6,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.navigation
+import com.example.timieu2023.features.eventsmap.EventDetailsArguments
 import com.example.timieu2023.features.eventsmap.eventsmapTabScreen
 import com.example.timieu2023.features.eventsmap.navigateToEventDetails
 import com.example.timieu2023.features.home.domain.EventViewData
@@ -27,8 +28,8 @@ fun MainNavigation(
         homeGraph(
             onEventClicked = {
                 navController.navigateToEventDetails(
-                    "14.0",
-                    "20.0"
+                    it.latId,
+                    it.longId
                 )
             },
             nestedGraph = {
@@ -41,7 +42,7 @@ fun MainNavigation(
 }
 
 fun NavGraphBuilder.homeGraph(
-    onEventClicked: (EventViewData) -> Unit,
+    onEventClicked: (EventDetailsArguments) -> Unit,
     nestedGraph: NavGraphBuilder.() -> Unit
 ) {
     navigation(

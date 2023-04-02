@@ -11,7 +11,9 @@ data class EventDTO(
     val eventLocationName: String?,
     val eventDate: String?,
     val eventTime: String?,
-    val photoUrl: String?
+    val photoUrl: String?,
+    val lat: String?,
+    val long: String?
 ) {
     fun mapToEventEntity(): EventEntity {
         return EventEntity(
@@ -22,7 +24,9 @@ data class EventDTO(
             this.eventLocationName,
             this.eventDate,
             this.eventTime,
-            this.photoUrl
+            this.photoUrl,
+            this.lat,
+            this.long
         )
     }
 }
