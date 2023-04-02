@@ -12,6 +12,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
@@ -43,29 +44,42 @@ class HomeViewModel @Inject constructor(
                 println("cata $deserializedList")
             }
         }
+        loadEvents()
     }
 
-    val events = eventRepository.events.map { eventsList ->
-            eventsList.map {
-                EventViewData(
-                    eventName = it.eventName,
-                    eventCategory = it.eventCategory,
-                    eventDescription = it.eventDescription,
-                    imageRef = it.photoUrl,
-                    eventDate = it.eventDate,
-                    eventTime = it.eventTime,
-                    eventNameLocation = it.eventLocationName,
-                )
+    private fun loadEvents() {
+        viewModelScope.launch {
+            eventRepository.events.map { eventsList ->
+                eventsList.map {
+                    EventViewData(
+                        eventName = it.eventName,
+                        eventCategory = it.eventCategory,
+                        eventDescription = it.eventDescription,
+                        imageRef = it.photoUrl,
+                        eventDate = it.eventDate,
+                        eventTime = it.eventTime,
+                        eventNameLocation = it.eventLocationName,
+                    )
+                }
+            }.collectLatest { listEvents ->
+                _state.update {
+                    it.copy(
+                        filteredListEvents = listEvents,
+                        listEvents = listEvents
+                    )
+                }
             }
-        }.stateIn(
-            viewModelScope,
-            SharingStarted.WhileSubscribed(5000), listOf()
-        )
-
+        }
+    }
 
     fun onSearchQueryChange(changedQuery: String) {
         _state.update {
-            it.copy(query = changedQuery)
+            it.copy(
+                query = changedQuery,
+                filteredListEvents = it.listEvents.filter { event ->
+                    event.eventName?.contains(changedQuery) ?: false
+                }
+            )
         }
     }
 
@@ -115,4 +129,6 @@ data class HomeViewState(
     val weatherState: WeatherState = WeatherState(
         weatherInfo = null, isLoading = false, error = null
     ),
+    val filteredListEvents: List<EventViewData> = emptyList(),
+    val listEvents: List<EventViewData> = emptyList()
 )

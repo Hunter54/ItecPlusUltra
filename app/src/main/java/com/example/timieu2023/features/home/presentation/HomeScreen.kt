@@ -47,7 +47,6 @@ fun HomeTabRoute(
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val homeState by viewModel.state.collectAsState()
-    val events by viewModel.events.collectAsState()
 
     HomeTabScreen(
         onQueryChange = { query ->
@@ -55,7 +54,7 @@ fun HomeTabRoute(
         },
         homeState.query,
         weatherState = homeState.weatherState,
-        events = events,
+        events = homeState.filteredListEvents,
         modifier,
     )
 }
@@ -79,9 +78,6 @@ fun HomeTabScreen(
             modifier = modifier
         )
         HomeTopQuestion(
-            modifier
-        )
-        HomeFilterChips(
             modifier
         )
         HomeWeatherTab(weatherState = weatherState)
@@ -152,16 +148,6 @@ fun HomeTopQuestion(
             )
         }
     }
-}
-
-@Composable
-fun HomeFilterChips(
-    modifier: Modifier = Modifier
-) {
-    Text(
-        text = "Filter chips",
-        modifier = modifier.padding(16.dp)
-    )
 }
 
 @Composable
