@@ -8,4 +8,6 @@ data class EventViewData(
     val eventNameLocation: String? = "",
     val eventDescription: String? = "",
     val imageRef: String? = "",
+    val lat: String,
+    val long: String
 )

@@ -34,6 +34,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import coil.compose.SubcomposeAsyncImage
+import com.example.timieu2023.features.eventsmap.EventDetailsArguments
 import com.example.timieu2023.features.home.domain.EventViewData
 import com.example.timieu2023.features.home.presentation.weather.WeatherCard
 import com.example.timieu2023.features.home.presentation.weather.WeatherState
@@ -41,7 +42,7 @@ import com.example.timieu2023.features.home.presentation.weather.WeatherState
 @Composable
 fun HomeTabRoute(
     modifier: Modifier = Modifier,
-    onEventClick: (EventViewData) -> Unit,
+    onEventClick: (EventDetailsArguments) -> Unit,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val homeState by viewModel.state.collectAsState()
@@ -64,7 +65,7 @@ fun HomeTabScreen(
     query: String,
     weatherState: WeatherState,
     events: List<EventViewData>,
-    onEventClick: (EventViewData) -> Unit,
+    onEventClick: (EventDetailsArguments) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -197,7 +198,7 @@ fun DestinationsTitle(
 @Composable
 fun DestinationsTab(
     modifier: Modifier = Modifier,
-    onEventClick: (EventViewData) -> Unit,
+    onEventClick: (EventDetailsArguments) -> Unit,
     events: List<EventViewData>,
 ) {
     BoxWithConstraints(
@@ -217,7 +218,7 @@ fun DestinationsTab(
 @Composable
 fun EventItem(
     event: EventViewData,
-    onEventClick: (EventViewData) -> Unit,
+    onEventClick: (EventDetailsArguments) -> Unit,
     modifier: Modifier = Modifier
 ) {
 
@@ -227,7 +228,12 @@ fun EventItem(
             .height(140.dp)
             .fillMaxWidth()
             .clickable {
-                onEventClick(event)
+                onEventClick(
+                    EventDetailsArguments(
+                        latId = event.lat,
+                        longId = event.long
+                    )
+                )
             },
 
         ) {
