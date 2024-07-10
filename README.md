@@ -125,31 +125,31 @@ Here you will find some screenshots that ilustrate how the app works.
 
 1. Splash screen 
 
- <img src="https://github.com/Hunter54/ItecPlusUltra/blob/main/images/8.jpg" width="320">
+ <img src="https://github.com/Hunter54/ItecPlusUltra/blob/main/images/1.jpg" width="320">
 
 2. Start screen that illustrate vibes of vacation
  
- <img src="https://github.com/Hunter54/ItecPlusUltra/blob/main/images/7.jpg" width="320">
+ <img src="https://github.com/Hunter54/ItecPlusUltra/blob/main/images/2.jpg" width="320">
 
 3. Pick your interests
 
- <img src="https://github.com/Hunter54/ItecPlusUltra/blob/main/images/6.jpg" width="320">
+ <img src="https://github.com/Hunter54/ItecPlusUltra/blob/main/images/3.jpg" width="320">
 
 4. Home screen where you can search for events and check out weather
 
- <img src="https://github.com/Hunter54/ItecPlusUltra/blob/main/images/5.jpg" width="320">
+ <img src="https://github.com/Hunter54/ItecPlusUltra/blob/main/images/4.jpg" width="320">
 
  5. Events are shown on the map
 
- <img src="https://github.com/Hunter54/ItecPlusUltra/blob/main/images/4.jpg" width="320">
+ <img src="https://github.com/Hunter54/ItecPlusUltra/blob/main/images/5.jpg" width="320">
 
-<img src="https://github.com/Hunter54/ItecPlusUltra/blob/main/images/3.jpg" width="320">
+<img src="https://github.com/Hunter54/ItecPlusUltra/blob/main/images/6.jpg" width="320">
 
 6. Treasure hunt! Have fun while visiting!
 
-<img src="https://github.com/Hunter54/ItecPlusUltra/blob/main/images/2.jpg" width="320">
+<img src="https://github.com/Hunter54/ItecPlusUltra/blob/main/images/7.jpg" width="320">
 
-<img src="https://github.com/Hunter54/ItecPlusUltra/blob/main/images/1.jpg" width="320">
+<img src="https://github.com/Hunter54/ItecPlusUltra/blob/main/images/8.jpg" width="320">
 
 <!-- CONTRIBUTING -->
 ## Contributing
