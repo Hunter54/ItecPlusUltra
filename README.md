@@ -83,7 +83,9 @@
 
 *Explore Timisoara with our mobile app! Perfect for first-time visitors, enjoy a fun treasure hunt through iconic landmarks and hidden gems while learning about the city's history. Your adventure begins here!*
 
-This project was a 48 hour contest 
+This project was developed during an intense 48-hour contest organized by [iTEC Timisoara](https://itec.ro/page/itec-2023). The competition challenged participants to create a mobile application that redefines the way we discover, enjoy, and experience Timisoara. Our innovative app, designed with tourists in mind, offers a unique blend of interactive treasure hunts and detailed location insights, making it the perfect guide for exploring the city's rich history and vibrant culture. Join us in transforming the way people connect with Timisoara!
+
+Additionally, we are proud to have secured 1st place in this contest!! <3
 
 ### Built With
 
