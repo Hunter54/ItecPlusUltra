@@ -81,9 +81,9 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-*Ever left your phone in a couch cushion or on a silent mode somewhere in your house? With 2ClapsAway, you don't need to panic or search frantically. Simply clap twice, and your phone will ring, guiding you right to it. Simplify your life and reduce daily stress; your device is always just two claps away.*
+*Explore Timisoara with our mobile app! Perfect for first-time visitors, enjoy a fun treasure hunt through iconic landmarks and hidden gems while learning about the city's history. Your adventure begins here!*
 
-This project was built with an intention to learn even more about some Android specifics but mostly I was curious about how to implement an AI listener and use it in some App. I integrated AI sound recognition with this API: [TfLite](https://www.tensorflow.org/lite). See this for specific implementation: [Integration](https://www.tensorflow.org/lite/android/tutorials/audio_classification) or just check out how I implemented.
+This project was a 48 hour contest 
 
 ### Built With
 
@@ -124,25 +124,35 @@ And then import it to Android Studio
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Here i will post some screenshots to ilustrate how the app works.
+Here you will find some screenshots that ilustrate how the app works.
 
-1. Tap on the button for the app to start listening
+1. Splash screen 
 
- <img src="https://github.com/Hunter54/ItecPlusUltra/blob/main/images/ss1.png" width="320">
+ <img src="https://github.com/Hunter54/ItecPlusUltra/blob/main/images/8.png" width="320">
 
-2. Adjust volume & sensitivity
+2. Start screen that illustrate vibes of vacation
  
- <img src="https://github.com/Hunter54/ItecPlusUltra/blob/main/images/ss2.png" width="320">
+ <img src="https://github.com/Hunter54/ItecPlusUltra/blob/main/images/7.png" width="320">
 
-3. Configure more settings
+3. Pick your interests
 
- <img src="https://github.com/Hunter54/ItecPlusUltra/blob/main/images/ss3.png" width="320">
+ <img src="https://github.com/Hunter54/ItecPlusUltra/blob/main/images/6.png" width="320">
 
- <img src="https://github.com/Hunter54/ItecPlusUltra/blob/main/images/ss4.png" width="320">
+4. Home screen where you can search for events and check out weather
 
- Video demo
+ <img src="https://github.com/Hunter54/ItecPlusUltra/blob/main/images/5.png" width="320">
 
- [Demo](https://github.com/Hunter54/ItecPlusUltra/assets/93397265/e8642a80-97da-4d4c-9a6e-c9aacec084c4)
+ 5. Events are shown on the map
+
+ <img src="https://github.com/Hunter54/ItecPlusUltra/blob/main/images/4.png" width="320">
+
+<img src="https://github.com/Hunter54/ItecPlusUltra/blob/main/images/3.png" width="320">
+
+6. Treasure hunt! Have fun while visiting!
+
+<img src="https://github.com/Hunter54/ItecPlusUltra/blob/main/images/2.png" width="320">
+
+<img src="https://github.com/Hunter54/ItecPlusUltra/blob/main/images/1.png" width="320">
 
 <!-- CONTRIBUTING -->
 ## Contributing
@@ -161,20 +171,15 @@ Don't forget to give the project a star! Thanks again!
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-
-<!-- LICENSE -->
-## License
-
-Distributed under the Apache-2.0 License. See `LICENSE.txt` for more information.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
 <!-- CONTACT -->
-## Contact
+## Contact on Linkedin
 
-Linkedin: [Profile](https://www.linkedin.com/in/vlad-ricean-12155622a/)
+[Catalin Vanciu](https://www.linkedin.com/in/catalin-marian-vanciu-027ab51aa/)
+
+[Ionut Valase](https://www.linkedin.com/in/ionut-valase-4546a81aa/)
+
+[Vlad Ricean](https://www.linkedin.com/in/vlad-ricean-12155622a/)
+
 
 Project Link: [Link](https://github.com/Hunter54/ItecPlusUltra)
 
